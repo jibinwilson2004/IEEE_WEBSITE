@@ -1,0 +1,2570 @@
+<script>
+        // Navbar scroll effect and mobile menu
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenu.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            
+            // Animate hamburger
+            const spans = mobileMenu.querySelectorAll('span');
+            if (navLinks.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                    const spans = mobileMenu.querySelectorAll('span');
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
+                }
+            });
+        });
+
+        // Enhanced Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Special handling for feature cards
+                    if (entry.target.classList.contains('slide-in-right')) {
+                        const featureCards = entry.target.querySelectorAll('.feature-card');
+                        featureCards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('animate');
+                            }, index * 200);
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation for stats
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 60;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current) + '+';
+            }, 30);
+        }
+
+        // Trigger counter animation when stats section is visible
+        const statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        const target = parseInt(stat.textContent);
+                        animateCounter(stat, target);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // Office Bearers Year selector functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearRadios = document.querySelectorAll('input[name="year"]');
+            const teamGrids = document.querySelectorAll('.team-grid');
+
+            yearRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    // Hide all team grids
+                    teamGrids.forEach(grid => {
+                        grid.classList.remove('active');
+                    });
+
+                    // Show selected year team grid with animation delay
+                    const selectedYear = this.value;
+                    const selectedGrid = document.getElementById(`team-${selectedYear}`);
+                    
+                    setTimeout(() => {
+                        selectedGrid.classList.add('active');
+                    }, 100);
+                });
+            });
+        });
+
+        // FAQ Toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Enhanced parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroContent = document.querySelector('.hero-content');
+            const particles = document.querySelectorAll('.particle');
+            
+            if (heroContent && scrolled < window.innerHeight) {
+                heroContent.style.transform = `translateY(${scrolled * 0.1}px)`;
+                heroContent.style.opacity = 1 - (scrolled / window.innerHeight) * 0.5;
+            }
+            
+            particles.forEach((particle, index) => {
+                const speed = (index + 1) * 0.05;
+                particle.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+            });
+        });
+
+        // Dynamic particle effect enhancement
+        function createParticle() {
+            const particle = document.createElement('div');
+            const size = Math.random() * 6 + 2;
+            const colors = ['rgba(255, 107, 53, 0.6)', 'rgba(255, 165, 0, 0.6)', 'rgba(255, 107, 53, 0.3)'];
+            
+            particle.style.position = 'fixed';
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.zIndex = '999';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = window.innerHeight + 'px';
+            particle.style.boxShadow = `0 0 ${size * 2}px ${colors[Math.floor(Math.random() * colors.length)]}`;
+            
+            document.body.appendChild(particle);
+            
+            // Animate particle
+            let pos = window.innerHeight;
+            const speed = Math.random() * 3 + 1;
+            const drift = Math.random() * 2 - 1;
+            let leftPos = parseFloat(particle.style.left);
+            
+            const animate = () => {
+                pos -= speed;
+                leftPos += drift;
+                particle.style.top = pos + 'px';
+                particle.style.left = leftPos + 'px';
+                particle.style.opacity = pos / window.innerHeight;
+                particle.style.transform = `rotate(${(window.innerHeight - pos) * 0.5}deg)`;
+                
+                if (pos > -10) {
+                    requestAnimationFrame(animate);
+                } else {
+                    document.body.removeChild(particle);
+                }
+            };
+            
+            animate();
+        }
+
+        // Create particles more frequently
+        setInterval(createParticle, 2000);
+
+        // Enhanced loading animation for images
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.style.opacity = '0';
+                img.style.transition = 'opacity 0.5s ease';
+                img.addEventListener('load', function() {
+                    this.style.opacity = '1';
+                });
+            });
+        });
+
+        // Hero title animation on page load
+        window.addEventListener('load', function() {
+            const heroTitle = document.querySelector('.hero-title');
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            const heroDescription = document.querySelector('.hero-description');
+            const heroCta = document.querySelector('.hero-cta');
+            
+            if (heroTitle) {
+                heroTitle.style.animation = 'gradientShift 4s ease-in-out infinite';
+                
+                // Stagger animations
+                setTimeout(() => {
+                    if (heroSubtitle) heroSubtitle.style.transform = 'translateY(0)';
+                }, 300);
+                
+                setTimeout(() => {
+                    if (heroDescription) heroDescription.style.transform = 'translateY(0)';
+                }, 600);
+                
+                setTimeout(() => {
+                    if (heroCta) heroCta.style.transform = 'translateY(0)';
+                }, 900);
+            }
+        });
+
+        // Add interactive hover effects for cards with enhanced animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.feature-card, .benefit-card, .activity-card, .team-member');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                    this.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+            });
+        });
+
+        // Enhanced scroll animations with stagger effect
+        const staggerObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const children = entry.target.children;
+                    Array.from(children).forEach((child, index) => {
+                        setTimeout(() => {
+                            child.style.opacity = '1';
+                            child.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    });
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Apply stagger animation to specific sections
+        document.querySelectorAll('.stats-container, .footer-content, .join-features').forEach(el => {
+            staggerObserver.observe(el);
+        });
+
+        // Smooth reveal animation for sections
+        const revealObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.8s ease-out';
+            revealObserver.observe(section);
+        });
+
+        // Add revealed class styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .revealed {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+            
+            .hero-subtitle, .hero-description, .hero-cta {
+                transform: translateY(30px);
+                transition: transform 0.8s ease-out;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Enh                <div class="team-member">
+                    <div class="member-photo">AN</div>
+                    <div class="member-info">
+                        <h3>Ananya Nair</h3>
+                        <p class="member-role">Vice Chairperson</p>
+                    </div>
+                    <a href="https://linkedin.com/in/ananya-nair" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">KP</div>
+                    <div class="member-info">
+                        <h3>Karthik Pillai</h3>
+                        <p class="member-role">Secretary</p>
+                    </div>
+                    <a href="https://linkedin.com/in/karthik-pillai" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">DR</div>
+                    <div class="member-info">
+                        <h3>Divya Radhika</h3>
+                        <p class="member-role">Treasurer</p>
+                    </div>
+                    <a href="https://linkedin.com/in/divya-radhika" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CS Team -->
+            <div class="team-grid" id="team-2023">
+                <div class="team-member">
+                    <div class="member-photo">AJ</div>
+                    <div class="member-info">
+                        <h3>Aditya Joshi</h3>
+                        <p class="member-role">Chairperson</p>
+                    </div>
+                    <a href="https://linkedin.com/in/aditya-joshi" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">MV</div>
+                    <div class="member-info">
+                        <h3>Meera Varma</h3>
+                        <p class="member-role">Vice Chairperson</p>
+                    </div>
+                    <a href="https://linkedin.com/in/meera-varma" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">SS</div>
+                    <div class="member-info">
+                        <h3>Suresh Sathyan</h3>
+                        <p class="member-role">Secretary</p>
+                    </div>
+                    <a href="https://linkedin.com/in/suresh-sathyan" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">NN</div>
+                    <div class="member-info">
+                        <h3>Nisha Nambiar</h3>
+                        <p class="member-role">Treasurer</p>
+                    </div>
+                    <a href="https://linkedin.com/in/nisha-nambiar" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- WIE Team -->
+            <div class="team-grid" id="team-2022">
+                <div class="team-member">
+                    <div class="member-photo">RR</div>
+                    <div class="member-info">
+                        <h3>Rohan Raj</h3>
+                        <p class="member-role">Chairperson</p>
+                    </div>
+                    <a href="https://linkedin.com/in/rohan-raj" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">KM</div>
+                    <div class="member-info">
+                        <h3>Kavya Mohan</h3>
+                        <p class="member-role">Vice Chairperson</p>
+                    </div>
+                    <a href="https://linkedin.com/in/kavya-mohan" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">DK</div>
+                    <div class="member-info">
+                        <h3>Deepak Kumar</h3>
+                        <p class="member-role">Secretary</p>
+                    </div>
+                    <a href="https://linkedin.com/in/deepak-kumar" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">SP</div>
+                    <div class="member-info">
+                        <h3>Sruthi Prakash</h3>
+                        <p class="member-role">Treasurer</p>
+                    </div>
+                    <a href="https://linkedin.com/in/sruthi-prakash" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq fade-in" id="faq">
+        <div class="faq-container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What is IEEE and why should I join?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>IEEE is the world's largest technical professional organization dedicated to advancing technology for humanity. By joining, you gain access to cutting-edge research, networking opportunities, career resources, and technical publications that can significantly enhance your professional development.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How can I become a member of IEEE MBITS Student Branch?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Students from MBITS can join by registering through our membership portal. You need to be enrolled at MBITS and have an interest in technology and engineering. Membership includes access to all our events, workshops, and resources.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What activities and events do you organize?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>We organize technical workshops, guest lectures from industry experts, hackathons, research projects, networking events, and innovation labs. We also participate in IEEE competitions and collaborate on entrepreneurship initiatives.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Are there any membership fees?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>IEEE Student membership has a nominal annual fee that provides access to IEEE resources including IEEE Xplore Digital Library, career guidance, and exclusive student benefits. The fee is significantly discounted for students.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Can I participate in research projects?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely! We encourage student participation in research projects. We collaborate with faculty and industry partners on various research initiatives, and members can contribute to publications and present their work at conferences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact fade-in" id="contact">
+        <div class="contact-container">
+            <div class="contact-info slide-in-left">
+                <h2 class="section-title" style="text-align: left; margin-bottom: 3rem;">Contact Us</h2>
+                <div class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <div>
+                        <h4>Address</h4>
+                        <p>IEEE MBITS Student Branch<br>Mar Baselios Institute of Technology & Science<br>Kothamangalam, Kerala, India</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <div>
+                        <h4>Email</h4>
+                        <p>ieee.mbits@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📱</span>
+                    <div>
+                        <h4>Phone</h4>
+                        <p>+91 98765 43210</p>
+                    </div>
+                </div>
+                
+                <!-- Location Section -->
+                <div class="location-section">
+                    <h4>🌍 Find Us On Map</h4>
+                    <div class="location-map">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.499029664069!2d76.6711249!3d10.058134200000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b07e8c21773f2f9%3A0xf8cc8247d7da7a9c!2sMar%20Baselios%20Institute%20of%20Technology%20and%20Science!5e0!3m2!1sen!2sin!4v1753464726332!5m2!1sen!2sin" 
+                            width="600" 
+                            height="450" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="location-details">
+                        <p><strong>Campus:</strong> Mar Baselios Institute of Technology & Science</p>
+                        <p><strong>Location:</strong> Kothamangalam, Ernakulam District, Kerala 686651</p>
+                        <p><strong>Nearby:</strong> 45km from Kochi International Airport</p>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="#" class="social-link" title="Facebook">📘</a>
+                    <a href="#" class="social-link" title="Instagram">📷</a>
+                    <a href="#" class="social-link" title="LinkedIn">💼</a>
+                    <a href="#" class="social-link" title="Twitter">🐦</a>
+                    <a href="#" class="social-link" title="YouTube">📺</a>
+                </div>
+            </div>
+            <div class="slide-in-right">
+                <div style="background: linear-gradient(135deg, #1a1a1a, #0a0a0a); padding: 3rem; border-radius: 20px; border: 1px solid rgba(255, 107, 53, 0.2);">
+                    <h3 style="color: #ff6b35; margin-bottom: 2rem; font-size: 1.8rem; font-family: 'Poppins', sans-serif;">Get In Touch</h3>
+                    <p style="color: #ccc; line-height: 1.7; margin-bottom: 2rem; font-family: 'Inter', sans-serif;">
+                        Have questions about IEEE MBITS or want to know more about our activities? 
+                        We'd love to hear from you! Reach out to us through any of the contact methods 
+                        or follow us on social media for the latest updates.
+                    </p>
+                    <div style="display: grid; gap: 1rem;">
+                        <div style="display: flex; align-items: center; color: #bbb; font-family: 'Inter', sans-serif;">
+                            <span style="color: #ff6b35; margin-right: 1rem;">🕒</span>
+                            <span>Office Hours: Mon-Fri, 9:00 AM - 5:00 PM</span>
+                        </div>
+                        <div style="display: flex; align-items: center; color: #bbb; font-family: 'Inter', sans-serif;">
+                            <span style="color: #ff6b35; margin-right: 1rem;">💬</span>
+                            <span>Quick Response on WhatsApp & Email</span>
+                        </div>
+                        <div style="display: flex; align-items: center; color: #bbb; font-family: 'Inter', sans-serif;">
+                            <span style="color: #ff6b35; margin-right: 1rem;">🌐</span>
+                            <span>Follow us for event updates</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>IEEE MBITS</h4>
+                    <p>Advancing Technology for Humanity</p>
+                    <p>Empowering the next generation of engineers and innovators through knowledge, networking, and professional development.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <p><a href="#about">About Us</a></p>
+                    <p><a href="#ieee-benefits">Why IEEE</a></p>
+                    <p><a href="#office-bearers">Office Bearers</a></p>
+                    <p><a href="#activities">Activities</a></p>
+                    <p><a href="#join-now">Join IEEE</a></p>
+                    <p><a href="#contact">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <p><a href="#">IEEE Xplore</a></p>
+                    <p><a href="#">IEEE Collabratec</a></p>
+                    <p><a href="#">Career Center</a></p>
+                    <p><a href="#">Standards</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <p>ieee.mbits@gmail.com</p>
+                    <p>+91 98765 43210</p>
+                    <p>Kothamangalam, Kerala</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 IEEE MBITS Student Branch. All rights reserved. | IEEE is a registered trademark of the Institute of Electrical and Electronics Engineers, Inc.</p>
+            </div>
+        </div>
+    </footer> 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">AN</div>
+                    <div class="member-info">
+                        <h3>Ananya Nair</h3>
+                        <p class="member-role">Vice Chairperson</p>
+                    </div>
+                    <a href="https://linkedin.com/in/ananya-nair" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0                <!-- Update all remaining LinkedIn buttons with SVG icons -->
+                <div class="team-member">
+                    <div class="member-photo">SK</div>
+                    <div class="member-info">
+                        <h3>Syno Shaji Kurian</h3>
+                        <p class="member-role">Vice Chair</p>
+                    </div>
+                    <a href="https://linkedin.com/in/syno-kurian" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">BJ</div>
+                    <div class="member-info">
+                        <h3>Basil Joy</h3>
+                        <p class="member-role">Secretary</p>
+                    </div>
+                    <a href="https://linkedin.com/in/basil-joy" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">AM</div>
+                    <div class="member-info">
+                        <h3>Abhijith Mathew</h3>
+                        <p class="member-role">Treasurer</p>
+                    </div>
+                    <a href="https://linkedin.com/in/abhijith-mathew" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">JL</div>
+                    <div class="member-info">
+                        <h3>Joel Alex Leo</h3>
+                        <p class="member-role">Information Management Coordinator</p>
+                    </div>
+                    <a href="https://linkedin.com/in/joel-alex-leo" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">AE</div>
+                    <div class="member-info">
+                        <h3>Albin Eldhose</h3>
+                        <p class="member-role">Technical Coordinator</p>
+                    </div>
+                    <a href="https://linkedin.com/in/albin-eldhose" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">BV</div>
+                    <div class="member-info">
+                        <h3>Basil Joy Varghese</h3>
+                        <p class="member-role">Technical Coordinator</p>
+                    </div>
+                    <a href="https://linkedin.com/in/basil-joy-varghese" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">MB</div>
+                    <div class="member-info">
+                        <h3>Merin K Binoy</h3>
+                        <p class="member-role">Event Coordinator</p>
+                    </div>
+                    <a href="https://linkedin.com/in/merin-binoy" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">CV</div>
+                    <div class="member-info">
+                        <h3>Ceeya Sara Varghese</h3>
+                        <p class="member-role">Event Coordinator</p>
+                    </div>
+                    <a href="https://linkedin.com/in/ceeya-varghese" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">TT</div>
+                    <div class="member-info">
+                        <h3>Tisa Tijo</h3>
+                        <p class="member-role">Documentation</p>
+                    </div>
+                    <a href="https://linkedin.com/in/tisa-tijo" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">EP</div>
+                    <div class="member-info">
+                        <h3>Ellen Mariya Paul</h3>
+                        <p class="member-role">Link Representative</p>
+                    </div>
+                    <a href="https://linkedin.com/in/ellen-paul" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">AA</div>
+                    <div class="member-info">
+                        <h3>Albert Aji</h3>
+                        <p class="member-role">Design Lead</p>
+                    </div>
+                    <a href="https://linkedin.com/in/albert-aji" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">DM</div>
+                    <div class="member-info">
+                        <h3>Dhanusree Manoj</h3>
+                        <p class="member-role">Membership Development Coordinator</p>
+                    </div>
+                    <a href="https://linkedin.com/in/dhanusree-manoj" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">SM</div>
+                    <div class="member-info">
+                        <h3>Samuel Mathew</h3>
+                        <p class="member-role">Content Lead</p>
+                    </div>
+                    <a href="https://linkedin.com/in/samuel-mathew" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">NK</div>
+                    <div class="member-info">
+                        <h3>Navneeth Krishnan</h3>
+                        <p class="member-role">Social Media</p>
+                    </div>
+                    <a href="https://linkedin.com/in/navneeth-krishnan" target="_blank" class="linkedin-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>        <div class="ieee-benefits-container">
+            <h2 class="section-title">Why IEEE?</h2>
+            <div class="benefits-slider">
+                <div class="benefits-track">
+                    <!-- First set -->
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <div class="benefit-logo">📚</div>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>IEEE eLearning Library</h3>
+                            <p>Access to a vast digital library with cutting-edge courses, certifications, and research papers from industry experts.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <div class="benefit-logo">📧</div>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Free Professional Email</h3>
+                            <p>Get your exclusive @ieee.org email address with robust messaging, calendar, and contact services.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <div class="benefit-logo">🎓</div>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Scholarships & Grants</h3>
+                            <p>Access exclusive scholarships, grants, and fellowships designed specifically for IEEE student members.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <div class="benefit-logo">✈️</div>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Student Travel Grant</h3>
+                            <p>Financial support for attending IEEE conferences, workshops, and technical events worldwide.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <div class="benefit-logo">📊</div>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>IEEE Standards Access</h3>
+                            <p>Free access to IEEE standards that shape global technology development and innovation.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <div class="benefit-logo">🌐</div>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Global Network Access</h3>
+                            <p>Connect with 400,000+ professionals worldwide through IEEE's extensive networking platforms.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <div class="benefit-logo">💼</div>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Career Services</h3>
+                            <p>Access career guidance, job board, resume reviews, and professional development resources.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <div class="benefit-logo">🏆</div>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Recognition Programs</h3>
+                            <p>Participate in prestigious awards and recognition programs for academic and professional excellence.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <div class="benefit-logo">🔬</div>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Research Opportunities</h3>
+                            <p>Access research collaboration opportunities and publication platforms in leading IEEE journals.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <div class="benefit-logo">♀️</div>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Women in Engineering</h3>
+                            <p>Supporting and promoting women in engineering through mentorship and leadership programs.</p>
+                        </div>
+                    </div>
+
+                    <!-- Duplicate set for seamless loop -->
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <div class="benefit-logo">📚</div>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>IEEE eLearning Library</h3>
+                            <p>Access to a vast digital library with cutting-edge courses, certifications, and research papers from industry experts.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <div class="benefit-logo">📧</div>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Free Professional Email</h3>
+                            <p>Get your exclusive @ieee.org email address with robust messaging, calendar, and contact services.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <div class="benefit-logo">🎓</div>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Scholarships & Grants</h3>
+                            <p>Access exclusive scholarships, grants, and fellowships designed specifically for IEEE student members.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <div class="benefit-logo">✈️</div>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Student Travel Grant</h3>
+                            <p>Financial support for attending IEEE conferences, workshops, and technical events worldwide.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <div class="benefit-logo">📊</div>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>IEEE Standards Access</h3>
+                            <p>Free access to IEEE standards that shape global technology development and innovation.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <div class="benefit-logo">🌐</div>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Global Network Access</h3>
+                            <p>Connect with 400,000+ professionals worldwide through IEEE's extensive networking platforms.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <div class="benefit-logo">💼</div>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Career Services</h3>
+                            <p>Access career guidance, job board, resume reviews, and professional development resources.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <div class="benefit-logo">🏆</div>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Recognition Programs</h3>
+                            <p>Participate in prestigious awards and recognition programs for academic and professional excellence.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <div class="benefit-logo">🔬</div>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Research Opportunities</h3>
+                            <p>Access research collaboration opportunities and publication platforms in leading IEEE journals.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <div class="benefit-logo">♀️</div>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Women in Engineering</h3>
+                            <p>Supporting and promoting women in engineering through mentorship and leadership programs.</p>
+                        </div>
+                    </div><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IEEE MBITS Student Branch</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700;800&family=Rajdhani:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            background: #0a0a0a;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #ff6b35, #ffa500);
+            border-radius: 4px;
+        }
+
+        /* Navbar Styles - Made more compact */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 0.5rem 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid rgba(255, 107, 53, 0.1);
+            height: 70px;
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            box-shadow: 0 4px 30px rgba(255, 107, 53, 0.1);
+            backdrop-filter: blur(25px);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            height: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: #ff6b35;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(255, 107, 53, 0.4);
+            letter-spacing: -0.5px;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            margin-right: 0.5rem;
+            animation: pulse 2s ease-in-out infinite;
+            object-fit: contain;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .nav-links a:hover {
+            color: #0a0a0a;
+            background: linear-gradient(45deg, #ff6b35, #ffa500);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 2px;
+            background: #ff6b35;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Enhanced Hero Section */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: 
+                linear-gradient(
+                    135deg, 
+                    rgba(10, 10, 10, 0.7), 
+                    rgba(26, 26, 26, 0.6), 
+                    rgba(10, 10, 10, 0.8)
+                ),
+                url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2125&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding-top: 70px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%),
+                linear-gradient(135deg, rgba(10, 10, 10, 0.8) 0%, rgba(26, 26, 26, 0.6) 50%, rgba(10, 10, 10, 0.9) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            max-width: 1200px;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(4rem, 12vw, 10rem);
+            font-weight: 900;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            background: linear-gradient(
+                135deg, 
+                #ff6b35 0%, 
+                #ffa500 25%, 
+                #fff 50%, 
+                #ffa500 75%, 
+                #ff6b35 100%
+            );
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
+            text-shadow: 0 0 50px rgba(255, 107, 53, 0.8);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { 
+                background-position: 0% 50%;
+                filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 30px rgba(255, 107, 53, 0.4));
+            }
+            50% { 
+                background-position: 100% 50%;
+                filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 50px rgba(255, 165, 0, 0.6));
+            }
+        }
+
+        .hero-subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1.2rem, 3vw, 2.2rem);
+            font-weight: 400;
+            color: #fff;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0.95;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-description {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            font-weight: 400;
+            color: #e0e0e0;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: linear-gradient(45deg, #ff6b35, #ffa500);
+            color: #0a0a0a;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 10px 30px rgba(255, 107, 53, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 
+                0 20px 50px rgba(255, 107, 53, 0.6),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-cta:hover::before {
+            left: 100%;
+        }
+
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 107, 53, 0.8);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(2n) {
+            animation-delay: -2s;
+            background: rgba(255, 165, 0, 0.6);
+        }
+
+        .particle:nth-child(3n) {
+            animation-delay: -4s;
+            background: rgba(255, 107, 53, 0.4);
+        }
+
+        @keyframes float {
+            0%,100% { 
+                transform: translateY(0) rotate(0deg); 
+                opacity: 0.8;
+            }
+            50% { 
+                transform: translateY(-30px) rotate(180deg); 
+                opacity: 1;
+            }
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+        }
+
+        .about-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, #ff6b35, #ffa500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4rem;
+            position: relative;
+            font-weight: 800;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b35, #ffa500);
+            border-radius: 2px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            margin-bottom: 5rem;
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #ccc;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .about-text h3 {
+            background: linear-gradient(45deg, #ff6b35, #ffa500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Feature Cards */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(50px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: rgba(255, 107, 53, 0.6);
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: #ff6b35;
+            display: block;
+        }
+
+        .feature-card h4 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .feature-card p {
+            color: #bbb;
+            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* IEEE Benefits Section - Enhanced Loop */
+        .ieee-benefits {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            overflow: hidden;
+        }
+
+        .benefits-slider {
+            position: relative;
+            width: 100%;
+            height: 420px;
+            overflow: hidden;
+            margin-top: 3rem;
+        }
+
+        .benefits-track {
+            display: flex;
+            width: calc(350px * 20);
+            animation: infiniteScroll 120s linear infinite;
+        }
+
+        .benefit-card {
+            min-width: 330px;
+            max-width: 330px;
+            height: 370px;
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border-radius: 20px;
+            margin: 0 10px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .benefit-card:hover::before {
+            opacity: 1;
+        }
+
+        .benefit-card:hover {
+            transform: scale(1.05) translateY(-10px);
+            border-color: rgba(255, 107, 53, 0.6);
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.3);
+        }
+
+        .benefit-icon {
+            width: 100%;
+            height: 140px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .benefit-logo {
+            font-size: 4rem;
+            color: #ff6b35;
+            transition: transform 0.6s ease;
+        }
+
+        .benefit-card:hover .benefit-logo {
+            transform: rotateY(360deg);
+        }
+
+        .benefit-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 140px;
+        }
+
+        .benefit-card h3 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.3;
+            min-height: 2.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .benefit-card p {
+            color: #bbb;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            text-align: center;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        @keyframes infiniteScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-350px * 10)); }
+        }
+
+        /* Pause animation on hover */
+        .benefits-slider:hover .benefits-track {
+            animation-play-state: paused;
+        }
+
+        /* Join Now Section - Enhanced */
+        .join-now {
+            padding: 10rem 0;
+            background: 
+                radial-gradient(ellipse at top, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom, rgba(255, 165, 0, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .join-now::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 165, 0, 0.1) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .join-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .join-content {
+            background: 
+                linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(10, 10, 10, 0.9)),
+                linear-gradient(45deg, rgba(255, 107, 53, 0.05), rgba(255, 165, 0, 0.05));
+            padding: 5rem 4rem;
+            border-radius: 30px;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .join-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.5), transparent);
+        }
+
+        .join-title {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #ff6b35, #ffa500, #ff6b35);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            font-family: 'Poppins', sans-serif;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        .join-description {
+            font-size: 1.3rem;
+            color: #e0e0e0;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .join-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .join-feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .join-feature:hover {
+            background: rgba(255, 107, 53, 0.15);
+            border-color: rgba(255, 107, 53, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .join-feature-icon {
+            font-size: 2rem;
+            color: #ff6b35;
+        }
+
+        .join-feature-text {
+            color: #ccc;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .join-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: linear-gradient(135deg, #ff6b35, #ffa500);
+            color: #0a0a0a;
+            padding: 1.5rem 4rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 15px 40px rgba(255, 107, 53, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+
+        .join-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.8s;
+        }
+
+        .join-button:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 
+                0 25px 60px rgba(255, 107, 53, 0.6),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .join-button:hover::before {
+            left: 100%;
+        }
+
+        .join-button-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .join-button:hover .join-button-icon {
+            transform: rotate(360deg);
+        }
+
+        /* Office Bearers Section */
+        .office-bearers {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        .office-bearers-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Year Selector for Office Bearers */
+        .year-selector {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .year-options {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .year-option {
+            position: relative;
+        }
+
+        .year-option input[type="radio"] {
+            display: none;
+        }
+
+        .year-option label {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            background: rgba(26, 26, 26, 0.8);
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 30px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .year-option label::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .year-option input[type="radio"]:checked + label {
+            background: linear-gradient(45deg, #ff6b35, #ffa500);
+            color: #0a0a0a;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .year-option label:hover {
+            border-color: rgba(255, 107, 53, 0.6);
+            transform: translateY(-1px);
+        }
+
+        .year-option label:hover::before {
+            left: 100%;
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .team-grid.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .team-grid:not(.active) {
+            display: none;
+        }
+
+        .team-member {
+            background: rgba(26, 26, 26, 0.9);
+            border-radius: 20px;
+            padding: 2rem 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 3px;
+            border-radius: 20px;
+            background: linear-gradient(45deg, #ff6b35, #ffa500, #ff1744, #e91e63, #9c27b0, #3f51b5, #2196f3, #00bcd4, #009688, #4caf50, #8bc34a, #cddc39, #ffeb3b, #ff9800);
+            background-size: 400% 400%;
+            animation: gradientShift 3s ease infinite;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            z-index: -1;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+        }
+
+        .member-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1rem;
+            border: 3px solid rgba(255, 107, 53, 0.5);
+            position: relative;
+            transition: all 0.3s ease;
+            background: linear-gradient(45deg, #ff6b35, #ffa500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #0a0a0a;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .member-photo:hover {
+            border-color: #ffa500;
+            box-shadow: 0 0 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .member-photo:hover img {
+            transform: scale(1.05);
+        }
+
+        .linkedin-btn {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #0a66c2, #004182);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(10, 102, 194, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+            z-index: 10;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .team-member:hover .linkedin-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .linkedin-btn:hover {
+            transform: scale(1.1);
+            background: linear-gradient(45deg, #004182, #0a66c2);
+            box-shadow: 0 6px 20px rgba(10, 102, 194, 0.6);
+        }
+
+        .linkedin-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .member-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            transition: color 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .team-member:hover .member-info h3 {
+            color: #ff6b35;
+        }
+
+        .member-role {
+            color: #ff6b35;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: #1a1a1a;
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            padding: 0 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #0a0a0a, #2d2d2d);
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b35, #ffa500);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.2);
+            border-color: rgba(255, 107, 53, 0.5);
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ff6b35, #ffa500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: countUp 2s ease-out;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: #ccc;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Activities Section - Enhanced Loop */
+        .activities {
+            padding: 8rem 0;
+            background: #0a0a0a;
+            overflow: hidden;
+        }
+
+        .activities-slider {
+            position: relative;
+            width: 100%;
+            height: 420px;
+            overflow: hidden;
+            margin-top: 3rem;
+        }
+
+        .activities-track {
+            display: flex;
+            width: calc(350px * 24);
+            animation: infiniteActivityScroll 140s linear infinite;
+        }
+
+        .activity-card {
+            min-width: 330px;
+            max-width: 330px;
+            height: 370px;
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border-radius: 20px;
+            margin: 0 10px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activity-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .activity-card:hover::before {
+            opacity: 1;
+        }
+
+        .activity-card:hover {
+            transform: scale(1.05) translateY(-10px);
+            border-color: rgba(255, 107, 53, 0.6);
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.3);
+        }
+
+        .activity-image {
+            width: 100%;
+            height: 140px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .activity-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .activity-card:hover .activity-image img {
+            transform: scale(1.1);
+        }
+
+        .activity-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 140px;
+        }
+
+        .activity-icon {
+            font-size: 3rem;
+            color: #ff6b35;
+            margin-bottom: 1rem;
+        }
+
+        .activity-card h3 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.3;
+            min-height: 2.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .activity-card p {
+            color: #bbb;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            text-align: center;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .activity-date {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 107, 53, 0.9);
+            color: #0a0a0a;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 10;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @keyframes infiniteActivityScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-350px * 12)); }
+        }
+
+        /* Pause animation on hover */
+        .activities-slider:hover .activities-track {
+            animation-play-state: paused;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+        }
+
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .faq-item {
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .faq-question {
+            padding: 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 10;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .faq-answer {
+            padding: 0 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            color: #bbb;
+            line-height: 1.7;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 0 2rem 2rem 2rem;
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: #ff6b35;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 0;
+            background: #0a0a0a;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #ff6b35;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            border-color: rgba(255, 107, 53, 0.5);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: #ff6b35;
+            margin-right: 1rem;
+            width: 30px;
+        }
+
+        .contact-item h4 {
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item p {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #ff6b35, #ffa500);
+            color: #0a0a0a;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Location Section */
+        .location-section {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            margin-top: 2rem;
+        }
+
+        .location-section h4 {
+            color: #ff6b35;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .location-map {
+            width: 100%;
+            height: 200px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        .location-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(50%) contrast(1.2);
+            transition: filter 0.3s ease;
+        }
+
+        .location-map:hover iframe {
+            filter: grayscale(0%) contrast(1);
+        }
+
+        .location-details {
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Footer */
+        .footer {
+            background: #0a0a0a;
+            padding: 3rem 0 1rem;
+            border-top: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: #ff6b35;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #bbb;
+            line-height: 1.6;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .footer-section a:hover {
+            color: #ff6b35;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 107, 53, 0.1);
+            padding-top: 2rem;
+            color: #888;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                height: 60px;
+                padding: 0.3rem 0;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero {
+                padding-top: 60px;
+            }
+
+            .hero-title {
+                font-size: clamp(3rem, 10vw, 8rem);
+            }
+
+            .about-content, .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .activities-track, .benefits-track {
+                animation-duration: 60s;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .year-options {
+                gap: 1rem;
+            }
+
+            .year-option label {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .linkedin-btn {
+                width: 40px;
+                height: 40px;
+                bottom: 12px;
+                left: 12px;
+            }
+
+            .location-map {
+                height: 150px;
+            }
+
+            .join-content {
+                padding: 3rem 2rem;
+            }
+
+            .join-title {
+                font-size: 2.5rem;
+            }
+
+            .join-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: clamp(2.5rem, 8vw, 6rem);
+            }
+
+            .hero-subtitle {
+                font-size: clamp(1rem, 4vw, 1.8rem);
+            }
+
+            .hero-description {
+                font-size: clamp(0.9rem, 3vw, 1.2rem);
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
