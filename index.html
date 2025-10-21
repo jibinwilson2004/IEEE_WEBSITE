@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IEEE MBITS Student Branch | Mar Baselios Institute of Technology & Science</title>
     <meta name="description" content="IEEE Student Branch at Mar Baselios Institute of Technology and Science (MBITS) - Advancing Technology for Humanity through technical excellence, innovation, and professional development.">
-    <meta name="keywords" content="IEEE, MBITS, IEEE MBITS, Student Branch, Mar Baselios, Technology, Engineering, Computer Society, Signal Processing, Women in Engineering, Kerala">
+    <meta name="keywords" content="IEEE, MBITS, IEEE MBITS, IEEE SB MBITS, Student Branch, Mar Baselios, Technology, Engineering, Computer Society, Signal Processing, Women in Engineering, Kerala">
     <meta name="author" content="IEEE MBITS Student Branch">
     <meta name="robots" content="index, follow">
     
@@ -16,7 +16,7 @@
     <meta property="og:url" content="https://ieeembits.com">
     <meta property="og:image" content="https://ieeembits.com/logo/IEEE-MBITS.png">
     <meta property="og:site_name" content="IEEE MBITS">
-    
+
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="IEEE MBITS Student Branch">
@@ -63,16 +63,16 @@
             border-radius: 4px;
         }
 
-        /* Navbar Styles */
+        /* Navbar Styles - Reduced Height */
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
-            height: 10%;
+            height: 70px;
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(15px);
             z-index: 1000;
-            padding: 1rem 0;
+            padding: 0.5rem 0;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border-bottom: 1px solid rgba(255, 107, 53, 0.2);
         }
@@ -90,13 +90,14 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 2rem;
+            height: 100%;
         }
 
         .logo {
             display: flex;
             align-items: center;
             color: #ff6b35;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
             letter-spacing: -0.5px;
@@ -104,10 +105,8 @@
         }
 
         .logo img {
-            width: 125px;
-            height: 75px;
-            margin-right: 0.5rem;
-            animation: pulse 2s ease-in-out infinite;
+            width: 100px;
+            height: 60px;
             object-fit: contain;
         }
 
@@ -119,7 +118,7 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .nav-links a {
@@ -128,9 +127,9 @@
             font-weight: 500;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            padding: 0.7rem 1.2rem;
+            padding: 0.5rem 1rem;
             border-radius: 30px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-family: 'Exo 2', sans-serif;
         }
 
@@ -542,6 +541,15 @@
 
         .about-text p {
             margin-bottom: 1.5rem;
+        }
+
+        /* SBC Logo Uniformity */
+        .feature-icon img {
+            width: 100%;
+            max-width: 180px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 0.5rem;
         }
 
         /* Feature Cards */
@@ -1589,10 +1597,9 @@
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="logo">
-                <span style="font-size: 3rem; margin-right: 0.5rem;"></span>
-                <a href="/demo.html" target="_blank">
-                <img src="/logo/IEEE-MBITS.png" alt="IEEE MBITS" style="height: 40px; vertical-align: middle;">
-            </a>
+                <a href="/" onclick="window.location.reload(); return false;">
+                    <img src="/IEEE MBITS.png" alt="IEEE MBITS Logo" loading="lazy">
+                </a>
             </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
@@ -1640,19 +1647,13 @@
                 <div class="about-text slide-in-left">
                     <h3>HISTORY OF IEEE MBITS</h3>
                     <p>
-                        The IEEE Student Branch at Mar Baselios Institute of Technology and Science (MBITS) was established on 3rd July 2022 
-                        with an initial membership of 34 students. It was formed with the aim of promoting technical excellence, innovation, 
-                        and professional development among students.
-                    </p>
-                    <p>
-                        The branch was guided by Branch Counselor Prof. Robin George, Assistant Professor in the Department of Electronics and 
-                        Communication Engineering (ECE), and led by its first Student Chair, Dileep Kumar A. from the ECE Department. 
-                        The official inauguration was conducted by Dr. Rajesh M. V., Chairman of the IEEE Kochi Subsection.
-                    </p>
-                    <p>
-                        Since its inception, IEEE SB MBITS has launched three active Student Branch Chapters (SBCs): the IEEE Signal Processing 
-                        Society (SPS), the IEEE Women in Engineering (WIE) Affinity Group, and the IEEE Computer Society (CS). These chapters 
-                        play a significant role in organizing workshops, technical talks, coding competitions, and hackathons.
+                        The IEEE Student Branch at Mar Baselios Institute of Technology and Science (MBITS) was established on 3rd July 2022 with an initial membership of 34 students. It was formed with the aim of promoting technical excellence, innovation, and professional development among students. <br><br>
+
+                        The branch was initially guided by Dr. Robin George, Assistant Professor in the Department of Electronics and Communication Engineering (ECE), and led by its first Student Chair, Dileep Kumar A. from the ECE Department. The official inauguration was conducted by Dr. Rajesh M. V, Chairman of the IEEE Kochi Subsection at that time. <br><br>
+
+                        At present, the branch is led by Branch Counselor Dr. Sajin C. S., Assistant Professor in the Department of Electronics and Communication Engineering (ECE), and Student Branch Chair Abhishek A. Under their leadership, the branch has grown significantly, now boasting a membership of 188 students across various departments. <br><br>
+
+                        Since its inception, IEEE SB MBITS has launched four active Student Branch Chapters (SBCs): the IEEE Signal Processing Society (SPS), the IEEE Circuits and Systems Society (CASS), the IEEE Women in Engineering (WIE) Affinity Group, and the IEEE Computer Society (CS). These chapters play a vital role in organizing workshops, technical talks, coding competitions, and hackathons, fostering an ecosystem of innovation, collaboration, and technical growth within the institution.
                     </p>
                 </div>
                 <div class="slide-in-right">
@@ -1662,25 +1663,31 @@
                     <div class="features-grid">
                         <div class="feature-card" data-delay="0">
                             <span class="feature-icon">
-                                <img src="/logo/sps.png" alt="SPS" style="height: 85px; width: 170px;;">
+                                <img src="/logo/sps.png" alt="IEEE Signal Processing Society" loading="lazy">
                             </span>
-
                             <h4>Signal Processing Society</h4>
                             <p>Advances signal processing techniques for communications, audio, image, speech, radar, and biomedical applications.</p>
                         </div>
                         <div class="feature-card" data-delay="400">
                             <span class="feature-icon">
-                                <img src="/logo/cs.png" alt="CS" style="height: 75px; width: 180px;">
+                                <img src="/logo/cs.png" alt="IEEE Computer Society" loading="lazy">
                             </span>
                             <h4>Computer Society</h4>
                             <p>Connects students with global computing professionals to exchange ideas and learn from each other.</p>
                         </div>
                         <div class="feature-card" data-delay="800">
                             <span class="feature-icon">
-                                <img src="/logo/wie.png" alt="WIE" style="height: 80px; width: 170px;">
+                                <img src="/logo/wie.png" alt="IEEE Women in Engineering" loading="lazy">
                             </span>
                             <h4>Women In Engineering</h4>
                             <p>Global network promoting women engineers and inspiring girls to pursue careers in engineering and technology.</p>
+                        </div>
+                        <div class="feature-card" data-delay="1200">
+                            <span class="feature-icon">
+                                <img src="/logo/CASS.png" alt="IEEE Circuits and Systems Society" loading="lazy">
+                            </span>
+                            <h4>Circuits And System Society</h4>
+                            <p>Dedicated to advancing the theory, analysis, design, and practical implementation of circuits and systems.</p>
                         </div>
                     </div>
                 </div>
@@ -1696,7 +1703,7 @@
                 <div class="stat-label">EVENTS CONDUCTED</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">150+</div>
+                <div class="stat-number">250+</div>
                 <div class="stat-label">ACTIVE MEMBERS</div>
             </div>
             <div class="stat-item">
@@ -1742,6 +1749,10 @@
                         <input type="radio" id="year-2022" name="year" value="2022">
                         <label for="year-2022">IEEE MBITS WIE AG</label>
                     </div>
+                    <div class="year-option">
+                        <input type="radio" id="year-2021" name="year" value="2021">
+                        <label for="year-2021">IEEE MBITS CASS SBC/label>
+                    </div>
                 </div>
             </div>
 
@@ -1749,208 +1760,208 @@
             <div class="team-grid active" id="team-2025">
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/sajin.jpg" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/sajin.jpg" alt="Dr. Sajin C S" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Dr. Sajin C S</h3>
                         <p class="member-role">Student Branch Counselor</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/sajin-c-s-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/dr-sajin-c-s-3b185050/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/Abhishek.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/Abhishek.png" alt="Abhishek A" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Abhishek A</h3>
                         <p class="member-role">SB Chair</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/abhishek-a-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/abhishek-anith/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/syno.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/Sy.png" alt="Syno Shaji Kurian" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Syno Shaji Kurian</h3>
                         <p class="member-role">SB Vice Chair</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/syno-shaji-kurian-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/syno-shaji-kurian-50a069291/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/basil.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/basil.png" alt="Basil Joy" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Basil Joy</h3>
                         <p class="member-role">Secretary</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/basil-joy-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.instagram.com/basil_bzl/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/abhi.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/abhi.png" alt="Abhijith Mathew" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Abhijith Mathew</h3>
                         <p class="member-role">Treasurer</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/abhijith-mathew-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/abhijith-mathew-195986269/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/joel.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/joel.png" alt="Joel Alex Leo" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Joel Alex Leo</h3>
                         <p class="member-role">Information Management Coordinator</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/joel-alex-leo-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.instagram.com/_.joel.alex._/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/albin.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/albin.png" alt="Albin Eldhose" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Albin Eldhose</h3>
                         <p class="member-role">Technical Coordinator</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/albin-eldhose-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/albin-eldose-32b249227/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/basilvar.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/basilvar.png" alt="Basil Joy Varghese" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Basil Joy Varghese</h3>
                         <p class="member-role">Technical Coordinator</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/basil-joy-varghese-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.instagram.com/basiljoy_/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/merin.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/merin.png" alt="Merin K Binoy" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Merin K Binoy</h3>
                         <p class="member-role">Event Coordinator</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/merin-k-binoy-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.instagram.com/_merin_mariyam_binoy/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/ceeya.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/ceeya.png" alt="Ceeya Sara Varghese" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Ceeya Sara Varghese</h3>
                         <p class="member-role">Event Coordinator</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/ceeya-sara-varghese-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/ceeya-sarah-varghese-38280632a/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/tisa.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/tisa.png" alt="Tisa Tijo" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Tisa Tijo</h3>
                         <p class="member-role">Documentation</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/tisa-tijo-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/tisa-tijo-ab3068291/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/ellen.jpg" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/ellen.jpg" alt="Ellen Mariya Paul" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Ellen Mariya Paul</h3>
                         <p class="member-role">Link Representative</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/ellen-mariya-paul-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/ellen-mariya-paul-32a928290/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/Albert.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/Albert.png" alt="Albert Aji" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Albert Aji</h3>
                         <p class="member-role">Design Lead</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/albert-aji-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/albert-aji-913704327/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/dhanusree.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/dhanusree.png" alt="Dhanusree Manoj" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Dhanusree Manoj</h3>
                         <p class="member-role">Membership Development Coordinator</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/dhanusree-manoj-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/dhanusree-manoj-673676353/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/Samuel.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/Samuel.png" alt="Samuel Mathew" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Samuel Mathew</h3>
                         <p class="member-role">Content Lead</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/samuel-mathew-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/samuel-mathew-322330338/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/nava.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/nava.png" alt="Navneeth Krishnan" loading="lazy">
                     </div>
                     <div class="member-info">
-                        <h3>Navneeth Krishnan</h3>
+                        <h3>Navneeth V S</h3>
                         <p class="member-role">Social Media</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/navneeth-krishnan-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.instagram.com/navaneeth._vs/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
@@ -1960,78 +1971,78 @@
             <div class="team-grid" id="team-2024">
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/sajin.jpg" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/sajin.jpg" alt="Dr. Sajin C S" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Dr. Sajin C S</h3>
                         <p class="member-role">Chapter Advisor</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/sajin-c-s-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/dr-sajin-c-s-3b185050/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/able.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/able.png" alt="Able Sabu" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Able Sabu</h3>
                         <p class="member-role">SBC Chair</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/able-sabu-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/able-sabu/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/delna.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/delna.png" alt="Delna Mariya Saji" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Delna Mariya Saji</h3>
                         <p class="member-role">SBC Vice Chair</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/delna-mariya-saji-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/delna-mariya-saji-885959290/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/cat.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/cat.png" alt="Cathline Mariam Paul" loading="lazy">
                     </div>
                     <div class="member-info">
-                        <h3>Cathline Mariam Paul </h3>
+                        <h3>Cathline Mariam Paul</h3>
                         <p class="member-role">Secretary</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/cathline-mariam-paul-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/cathalin-mariam-paul-586508279/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/abhi.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/abhi.png" alt="Abhijith Mathew" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Abhijith Mathew</h3>
                         <p class="member-role">Treasurer</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/abhijith-mathew-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/abhijith-mathew-195986269/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/syno.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/Syno.png" alt="Syno Shaji Kurian" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Syno Shaji Kurian</h3>
                         <p class="member-role">Women in Signal Processing</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/syno-shaji-kurian-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/syno-shaji-kurian-50a069291/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
@@ -2039,49 +2050,49 @@
                 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/albin.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/albin.png" alt="Albin Eldhose" loading="lazy">
                     </div>
                     <div class="member-info">
-                        <h3>Albin Eldhose </h3>
+                        <h3>Albin Eldhose</h3>
                         <p class="member-role">Technical Coordinator</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/albin-eldhose-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/albin-eldose-32b249227/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/basilvar.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/basilvar.png" alt="Basil Joy Varghese" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Basil Joy Varghese</h3>
                         <p class="member-role">Technical Coordinator</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/basil-joy-varghese-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.instagram.com/basiljoy_/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/elna.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/elna.png" alt="Elna Alias" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Elna Alias</h3>
                         <p class="member-role">Documentation</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/elna-alias-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/elnaalias/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
                 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/merin.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/merin.png" alt="Merin K Benoy" loading="lazy">
                     </div>
                     <div class="member-info">
-                        <h3>Merin K Benoy </h3>
+                        <h3>Merin K Benoy</h3>
                         <p class="member-role">Event Coordinator</p>
                     </div>
                     <a href="https://www.linkedin.com/in/merin-k-benoy-12345678" target="_blank" class="linkedin-btn">
@@ -2091,65 +2102,65 @@
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/ceeya.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/ceeya.png" alt="Ceeya Sara Varghese" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Ceeya Sara Varghese</h3>
                         <p class="member-role">Event Coordinator</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/ceeya-sara-varghese-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/ceeya-sarah-varghese-38280632a/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/Albert.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/Albert.png" alt="Albert Aji" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Albert Aji</h3>
                         <p class="member-role">Design Lead</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/albert-aji-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/albert-aji-913704327/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
                 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/adheena.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/adheena.png" alt="Adheena Johnson" loading="lazy">
                     </div>
                     <div class="member-info">
-                        <h3>Adheena Johnson </h3>
+                        <h3>Adheena Johnson</h3>
                         <p class="member-role">Membership Development Coordinator</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/adheena-johnson-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/adheena-johnson-3240a1355/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/Samuel.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/Samuel.png" alt="Samuel Mathew" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Samuel Mathew</h3>
                         <p class="member-role">Content Creator</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/samuel-mathew-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/samuel-mathew-322330338/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/nava.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/nava.png" alt="Navneeth krishnan" loading="lazy">
                     </div>
                     <div class="member-info">
-                        <h3>Navneeth krishnan</h3>
+                        <h3>Navneeth V S</h3>
                         <p class="member-role">Social Media</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/navneeth-krishnan-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.instagram.com/navaneeth._vs/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
@@ -2159,125 +2170,125 @@
             <div class="team-grid" id="team-2023">
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/suji.jpg" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/suji.jpg" alt="Dr. Suji Pramila R" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Dr. Suji Pramila R</h3>
                         <p class="member-role">SBC Chapter Advisor</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/suji-pramila-r-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/suji-pramila-r-42a13b265/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/jibin.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/jibin.png" alt="Jibin Wilson" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Jibin Wilson</h3>
                         <p class="member-role">SBC Chair</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/jibin-wilson-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/jibin-wilson-098071276/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/tisa.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/tisa.png" alt="Tisa Tijo" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Tisa Tijo</h3>
                         <p class="member-role">Vice Chair</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/tisa-tijo-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/tisa-tijo-ab3068291/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
-                    <div class="member-photo">NN</div>
+                    <div class="member-photo">AP</div>
                     <div class="member-info">
                         <h3>Aaron Peter Viju</h3>
                         <p class="member-role">Secretary</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/aaron-peter-viju-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/aaron-peter-viju-a75631198/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/abhi.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/abhi.png" alt="Abhijith Mathew" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Abhijith Mathew</h3>
                         <p class="member-role">Treasurer</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/abhijith-mathew-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/abhijith-mathew-195986269/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/Ashley.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/Ashley.png" alt="Ashley George" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Ashley George</h3>
                         <p class="member-role">Webmaster</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/ashley-george-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.instagram.com/ashley.__.george/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/ellen.jpg" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/ellen.jpg" alt="Ellen Mariya Paul" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Ellen Mariya Paul</h3>
                         <p class="member-role">Women in Computer Society</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/ellen-mariya-paul-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/ellen-mariya-paul-32a928290/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
                 
                  <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/john.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/john.png" alt="John George" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>John George</h3>
                         <p class="member-role">Technical Coordinator</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/john-george-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/john-george-90a231326/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                    <div class="member-photo">
-                        <img src="/execom/Samuel.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/Samuel.png" alt="Samuel Mathew" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Samuel Mathew</h3>
                         <p class="member-role">Documentation</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/samuel-mathew-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/samuel-mathew-322330338/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
                 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/ceeya.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/ceeya.png" alt="Ceeya Sara Vargheese" loading="lazy">
                     </div>
                     <div class="member-info">
-                        <h3>Ceeya Sara Vargheese </h3>
+                        <h3>Ceeya Sara Vargheese</h3>
                         <p class="member-role">Event Coordinator</p>
                     </div>
                     <a href="https://www.linkedin.com/in/ceeya-sara-vargheese-12345678" target="_blank" class="linkedin-btn">
@@ -2287,39 +2298,39 @@
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/nikhil.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/nikhil.png" alt="Nikhil Vijayanand" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Nikhil Vijayanand</h3>
                         <p class="member-role">Event Coordinator</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/nikhil-vijayanand-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/nikhil-vijayanand-395550370/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/Albert.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/Albert.png" alt="Albert Aji" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Albert Aji</h3>
                         <p class="member-role">Content Lead</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/albert-aji-12345678" target="_blank" class="linkedin-btn">
+                    <a href="hhttps://www.linkedin.com/in/albert-aji-913704327/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
                 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/syno.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/Sy.png" alt="Syno Shaji Kurian" loading="lazy">
                     </div>
                     <div class="member-info">
-                        <h3>Syno Shaji Kurian </h3>
+                        <h3>Syno Shaji Kurian</h3>
                         <p class="member-role">Membership Development Coordinator</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/syno-shaji-kurian-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/syno-shaji-kurian-50a069291/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
@@ -2329,114 +2340,114 @@
             <div class="team-grid" id="team-2022">
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/MINU-MARY-JOY-2.jpg" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/MINU-MARY-JOY-2.jpg" alt="Minu Mary" loading="lazy">
                     </div>
                     <div class="member-info">
-                        <h3>Minu Mary</h3>
+                        <h3>Prof. Minu Mary</h3>
                         <p class="member-role">AG Chapter Advisor</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/minu-mary-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/MINU-MARY-JOY-395855550370/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/cat.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/cat.png" alt="Cathline Mariam Paul" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Cathline Mariam Paul</h3>
                         <p class="member-role">AG Chair</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/cathline-mariam-paul-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/cathalin-mariam-paul-586508279/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/syno.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/Syno.png" alt="Syno Shaji Kurian" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Syno Shaji Kurian</h3>
                         <p class="member-role">Vice Chair</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/syno-shaji-kurian-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/syno-shaji-kurian-50a069291/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/merin.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/merin.png" alt="Merin K Binoy" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Merin K Binoy</h3>
                         <p class="member-role">Secretary</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/merin-k-binoy-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.instagram.com/_merin_mariyam_binoy/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/abhi.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/abhi.png" alt="Abhijith Mathew" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Abhijith Mathew</h3>
                         <p class="member-role">Treasurer</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/abhijith-mathew-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/abhijith-mathew-195986269/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/Ashley.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/Ashley.png" alt="Ashley George" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Ashley George</h3>
                         <p class="member-role">Webmaster</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/ashley-george-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.instagram.com/ashley.__.george/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                  <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/delna.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/delna.png" alt="Delna Mariya Shaji" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Delna Mariya Shaji</h3>
                         <p class="member-role">Technical Coordinator</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/delna-mariya-shaji-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/delna-mariya-saji-885959290/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/aleena.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/aleena.png" alt="Aleena Baby" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Aleena Baby</h3>
                         <p class="member-role">Technical Coordinator</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/aleena-baby-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/aleena-baby-8b613833a/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
                 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/ceeya.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/ceeya.png" alt="Ceeya Sara Vargheese" loading="lazy">
                     </div>
                     <div class="member-info">
-                        <h3>Ceeya Sara Vargheese </h3>
+                        <h3>Ceeya Sara Vargheese</h3>
                         <p class="member-role">Event Coordinator</p>
                     </div>
                     <a href="https://www.linkedin.com/in/ceeya-sara-vargheese-12345678" target="_blank" class="linkedin-btn">
@@ -2446,63 +2457,183 @@
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/basil.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/basil.png" alt="Basil Joy" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Basil Joy</h3>
                         <p class="member-role">Event Coordinator</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/basil-joy-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.instagram.com/basil_bzl/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
-                    <div class="member-photo">DR</div>
+                    <div class="member-photo">JW</div>
                     <div class="member-info">
                         <h3>Jibin Wilson</h3>
                         <p class="member-role">Content Lead</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/jibin-wilson-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/jibin-wilson-098071276/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
                 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/tisa.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/tisa.png" alt="Tisa Tijo" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Tisa Tijo</h3>
                         <p class="member-role">Membership Development Coordinator</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/tisa-tijo-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/tisa-tijo-ab3068291/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/Abhishek.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/Abhishek.png" alt="Abhishek A" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Abhishek A</h3>
-                        <p class="member-role">Social Media </p>
+                        <p class="member-role">Social Media</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/abhishek-a-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.linkedin.com/in/abhishek-anith/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
                 
                 <div class="team-member">
                     <div class="member-photo">
-                        <img src="/execom/joel.png" alt="Activity Image" style="width: 100%; height: auto;">
+                        <img src="/execom/joel.png" alt="Joel Alex Leo" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h3>Joel Alex Leo</h3>
                         <p class="member-role">Design Lead</p>
                     </div>
-                    <a href="https://www.linkedin.com/in/joel-alex-leo-12345678" target="_blank" class="linkedin-btn">
+                    <a href="https://www.instagram.com/_.joel.alex._/" target="_blank" class="linkedin-btn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+
+             <!-- CASS Team -->
+            <div class="team-grid" id="team-2021">
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="/execom/sajin.jpg" alt="Dr. Sajin C S" loading="lazy">
+                    </div>
+                    <div class="member-info">
+                        <h3>Dr. Sajin C S</h3>
+                        <p class="member-role">Chapter Advisor</p>
+                    </div>
+                    <a href="https://www.linkedin.com/in/dr-sajin-c-s-3b185050/" target="_blank" class="linkedin-btn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="/execom/Sy.png" alt="Jibin Wilson" loading="lazy">
+                    </div>
+                    <div class="member-info">
+                        <h3>Jibin Wilson</h3>
+                        <p class="member-role">AG Chair</p>
+                    </div>
+                    <a href="https://www.linkedin.com/in/cathalin-mariam-paul-586508279/" target="_blank" class="linkedin-btn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="/execom/albin.png" alt="Syno Shaji Kurian" loading="lazy">
+                    </div>
+                    <div class="member-info">
+                        <h3>Albin Eldhose</h3>
+                        <p class="member-role">Vice Chair</p>
+                    </div>
+                    <a href="https://www.linkedin.com/in/albin-eldose-32b249227/" target="_blank" class="linkedin-btn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="/execom/merin.png" alt="Merin K Binoy" loading="lazy">
+                    </div>
+                    <div class="member-info">
+                        <h3>Cathline Mariam Paul</h3>
+                        <p class="member-role">Secretary</p>
+                    </div>
+                    <a href="https://www.instagram.com/_merin_mariyam_binoy/" target="_blank" class="linkedin-btn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="/execom/abhi.png" alt="Abhijith Mathew" loading="lazy">
+                    </div>
+                    <div class="member-info">
+                        <h3>Abhijith Mathew</h3>
+                        <p class="member-role">Treasurer</p>
+                    </div>
+                    <a href="https://www.linkedin.com/in/abhijith-mathew-195986269/" target="_blank" class="linkedin-btn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="/execom/nikhil.png" alt="Nikhil Vijayanand" loading="lazy">
+                    </div>
+                    <div class="member-info">
+                        <h3>Nikhil Vijayanand</h3>
+                        <p class="member-role">Webmaster</p>
+                    </div>
+                    <a href="https://www.linkedin.com/in/abhijith-mathew-195986269/" target="_blank" class="linkedin-btn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+
+                 <div class="team-member">
+                    <div class="member-photo">
+                        <img src="/execom/delna.png" alt="Delna Mariya Saji" loading="lazy">
+                    </div>
+                    <div class="member-info">
+                        <h3>Delna Mariya Shaji</h3>
+                        <p class="member-role">Technical Coordinator</p>
+                    </div>
+                    <a href="https://www.linkedin.com/in/delna-mariya-saji-885959290/" target="_blank" class="linkedin-btn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="/execom/aleena.png" alt="Aleena Baby" loading="lazy">
+                    </div>
+                    <div class="member-info">
+                        <h3>Aleena Baby</h3>
+                        <p class="member-role">Women in CASS</p>
+                    </div>
+                    <a href="https://www.linkedin.com/in/aleena-baby-12345678" target="_blank" class="linkedin-btn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="/execom/basil.png" alt="Basil Joy" loading="lazy">
+                    </div>
+                    <div class="member-info">
+                        <h3>Basil Joy</h3>
+                        <p class="member-role">Event Coordinator</p>
+                    </div>
+                    <a href="https://www.instagram.com/basil_bzl/" target="_blank" class="linkedin-btn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
@@ -3305,7 +3436,7 @@
                     activityCard.innerHTML = `
                         <div class="activity-date">${activity.date}</div>
                         <div class="activity-image">
-                            <img src="${activity.image}" alt="Activity Image" style="width: 100%; height: auto;">
+                            <img src="${activity.image}" alt="${activity.title}" loading="lazy">
                         </div>
                         <div class="activity-content">
                             <h3>${activity.title}</h3>
