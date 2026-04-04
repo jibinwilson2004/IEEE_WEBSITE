@@ -119,12 +119,10 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html#home">Home</a></li>
                 <li><a href="index.html#about">About</a></li>
-                <li><a href="index.html#ieee-benefits">Why IEEE</a></li>
                 <li><a href="execom.html">Office Bearers</a></li>
                 <li><a href="events.html">Activities</a></li>
-                <li><a href="index.html#faq">FAQ</a></li>
-                <li><a href="index.html#join-now">Join</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="join.html" class="join-button">Join Now</a></li>
             </ul>
             <div class="mobile-menu" id="mobileMenu">
                 <span></span>
@@ -136,22 +134,33 @@
 
     <!-- Enhanced Hero Section -->
     <section class="hero" id="home">
-        <!-- Floating Neo-Brutalist decorative shapes -->
-        <div class="floating-shape shape-1">★</div>
-        <div class="floating-shape shape-2">✦</div>
-        <div class="floating-shape shape-3">⚙</div>
-        
-        <div class="hero-content brutal-card">
-            <h1 class="hero-title"><span class="marker-highlight">IEEE MBITS</span></h1>
-            <p class="hero-subtitle">Advancing Technology for Humanity</p>
+        <div class="hero-visuals" aria-hidden="true">
+            <div class="engineering-shape blueprint-grid" data-speed="0.06" data-action="follow"></div>
+            <div class="engineering-shape circuit-cluster" data-speed="0.12" data-action="follow"></div>
+            <div class="engineering-shape material-block" data-speed="0.1" data-base="rotate(-6deg)" data-action="repel"></div>
+            <div class="engineering-shape beam-line" data-speed="0.08" data-action="follow"></div>
+            <div class="engineering-shape symbol-badge" data-speed="0.14" data-action="follow">Σ</div>
+            <div class="hero-geo geo-circle" data-speed="0.3" data-action="repel"></div>
+            <div class="hero-geo geo-square" data-speed="0.22" data-action="follow"></div>
+            <div class="hero-geo geo-blob" data-speed="0.26" data-action="repel"></div>
+            <div class="hero-geo geo-ring" data-speed="0.18" data-action="follow"></div>
+            <div class="engineering-shape micro-dot" data-speed="0.18" data-action="follow"></div>
+            <div class="engineering-shape micro-ring" data-speed="0.16" data-action="repel"></div>
+            <div class="engineering-shape micro-chip" data-speed="0.2" data-action="follow"></div>
+            <div class="engineering-shape micro-trace" data-speed="0.13" data-action="repel"></div>
+        </div>
+
+        <header class="hero-content brutal-card">
+            <h1 class="hero-title">IEEE MBITS</h1>
+            <p class="hero-subtitle">Bold Innovation. Technical Leadership.</p>
             <p class="hero-description brutal-border">
-                Empowering the next generation of engineers and innovators through knowledge,
-                networking, and professional development at Mar Baselios Institute of Technology & Science.
-                Join us in shaping the future of technology and making a difference in the world.
+                Empowering the next generation of engineers through technical excellence,
+                hands-on innovation, and an unapologetically bold design language.
+                Discover how IEEE MBITS blends engineering culture with modern creativity.
             </p>
             <a href="#about" class="hero-cta">
                 <span>Explore More</span>
-                <span class="hero-cta-icon">🚀</span>
+                <span class="hero-cta-icon"></span>
             </a>
         </div>
     </section>
@@ -224,6 +233,14 @@
                             <p>Dedicated to advancing the theory, analysis, design, and practical implementation of
                                 circuits and systems.</p>
                         </div>
+                        <div class="feature-card brutal-card bg-lavender" data-delay="1600">
+                            <span class="feature-icon">
+                                <img src="logo/sensor.png" alt="IEEE Sensor Council" loading="lazy">
+                            </span>
+                            <h4>Sensor Council</h4>
+                            <p>Supports interdisciplinary sensing, IoT, robotics, and embedded systems initiatives while
+                                enabling student collaboration with research and industry partners.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -275,7 +292,7 @@
                 <a href="https://www.ieee.org/membership/join" class="join-button" target="_blank"
                     onclick="alert('For membership registration  Contact us for Support')">
                     <span>Join IEEE Now</span>
-                    <span class="join-button-icon">⚡</span>
+                    <span class="join-button-icon"></span>
                 </a>
             </div>
         </div>
@@ -397,10 +414,8 @@
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <p><a href="#about">About Us</a></p>
-                    <p><a href="#ieee-benefits">Why IEEE</a></p>
                     <p><a href="execom.html">Office Bearers</a></p>
                     <p><a href="events.html">Activities</a></p>
-                    <p><a href="#join-now">Join IEEE</a></p>
                     <p><a href="#contact">Contact</a></p>
                 </div>
                 <div class="footer-section">

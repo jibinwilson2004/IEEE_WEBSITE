@@ -175,6 +175,64 @@ window.addEventListener('load', function () {
     setTimeout(() => { if (subtitle) subtitle.classList.add('pop-in'); }, 100);
     setTimeout(() => { if (desc) desc.classList.add('pop-in'); }, 200);
     setTimeout(() => { if (cta) cta.classList.add('pop-in'); }, 300);
+
+    const hero = document.querySelector('.hero');
+    const heroContent = document.querySelector('.hero-content');
+    const parallaxItems = document.querySelectorAll('.hero-visuals [data-speed]');
+
+    if (hero && parallaxItems.length) {
+        hero.addEventListener('pointermove', (event) => {
+            const rect = hero.getBoundingClientRect();
+            const offsetX = (event.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+            const offsetY = (event.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+            const shiftX = offsetX * 36;
+            const shiftY = offsetY * 26;
+            const noiseX = offsetX * 10;
+            const noiseY = offsetY * 10;
+            const noiseStrength = Math.min(0.32, Math.max(0, Math.abs(offsetX) + Math.abs(offsetY)) * 0.16);
+            const contentX = offsetX * 18;
+            const contentY = offsetY * 12;
+            const contentRotate = offsetX * 3;
+
+            hero.style.setProperty('--hero-shift-x', `${shiftX}px`);
+            hero.style.setProperty('--hero-shift-y', `${shiftY}px`);
+            hero.style.setProperty('--hero-noise-x', `${noiseX}`);
+            hero.style.setProperty('--hero-noise-y', `${noiseY}`);
+            hero.style.setProperty('--hero-noise', `${noiseStrength}`);
+
+            if (heroContent) {
+                heroContent.style.transform = `translate(${contentX}px, ${contentY}px) rotate(${contentRotate}deg)`;
+            }
+
+            parallaxItems.forEach(item => {
+                const speed = parseFloat(item.dataset.speed) || 0.12;
+                const action = item.dataset.action || 'follow';
+                const base = item.dataset.base || '';
+                const multiplier = action === 'repel' ? -1.8 : 1.5;
+                const x = offsetX * 48 * speed * multiplier;
+                const y = offsetY * 38 * speed * multiplier;
+                const rotate = offsetX * 14 * speed * (action === 'repel' ? -1 : 1);
+                item.style.transform = `${base} translate(${x}px, ${y}px) rotate(${rotate}deg)`;
+                item.style.opacity = `${0.78 + Math.min(0.42, Math.abs(offsetX * offsetY) * 0.42)}`;
+            });
+        });
+
+        hero.addEventListener('pointerleave', () => {
+            hero.style.setProperty('--hero-shift-x', '0px');
+            hero.style.setProperty('--hero-shift-y', '0px');
+            hero.style.setProperty('--hero-noise-x', '0px');
+            hero.style.setProperty('--hero-noise-y', '0px');
+            hero.style.setProperty('--hero-noise', '0');
+            if (heroContent) {
+                heroContent.style.transform = 'translate(0px, 0px) rotate(0deg)';
+            }
+            parallaxItems.forEach(item => {
+                const base = item.dataset.base || '';
+                item.style.transform = base ? `${base} translate(0px, 0px)` : 'translate(0px, 0px)';
+                item.style.opacity = '';
+            });
+        });
+    }
 });
 
 // Benefits Data with Font Awesome Icons
