@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery | IEEE MBITS Student Branch</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar scrolled" id="navbar" style="background: #ffde59; box-shadow: 0px 4px 0px #000;">
@@ -18,7 +22,7 @@
                 </a>
             </div>
             <ul class="nav-links" id="navLinks">
-                <li><a href="index.html#home">Home</a></li>
+                <li><a href="https://ieeesbmbits.in/">Home</a></li>
                 <li><a href="execom.html">Office Bearers</a></li>
                 <li><a href="events.html">Activities</a></li>
                 <li><a href="gallery.html" class="active">Gallery</a></li>
@@ -34,17 +38,21 @@
 
     <main style="padding-top: 120px; min-height: 80vh; max-width: 1400px; margin: 0 auto; padding-bottom: 5rem;">
         <div class="gallery-container section-entrance fade-in">
-            <h2 class="section-title" style="background: var(--brutal-yellow); transform: rotate(-1deg); margin-bottom: 3rem;">Photo Gallery</h2>
-            <p style="font-size: 1.2rem; font-weight: bold; margin-bottom: 3rem; text-align: center; background: #fff; padding: 1rem; border: 4px dashed #000;">
+            <h2 class="section-title"
+                style="background: var(--brutal-yellow); transform: rotate(-1deg); margin-bottom: 3rem;">Photo Gallery
+            </h2>
+            <p
+                style="font-size: 1.2rem; font-weight: bold; margin-bottom: 3rem; text-align: center; background: #fff; padding: 1rem; border: 4px dashed #000;">
                 Capturing moments of innovation, leadership, and community at IEEE MBITS.
             </p>
-            
+
             <style>
                 .masonry-grid {
                     columns: 3 300px;
                     column-gap: 1.5rem;
                     padding: 1rem;
                 }
+
                 .gallery-item {
                     display: inline-block;
                     width: 100%;
@@ -52,25 +60,30 @@
                     break-inside: avoid;
                     transition: transform 0.3s ease;
                 }
+
                 .gallery-item:hover {
                     transform: scale(1.02) rotate(1deg);
                     z-index: 10;
                 }
+
                 .gallery-img-container {
                     border: 4px solid #000;
                     background: #fff;
                     line-height: 0;
                 }
+
                 .gallery-img-container img {
                     width: 100%;
                     height: auto;
                     display: block;
                 }
+
                 @media (max-width: 768px) {
                     .masonry-grid {
                         columns: 2 200px;
                     }
                 }
+
                 @media (max-width: 480px) {
                     .masonry-grid {
                         columns: 1;
@@ -80,26 +93,81 @@
 
             <div class="masonry-grid">
                 <!-- All 23 images from /gallery folder -->
-                <div class="gallery-item brutal-card"><div class="gallery-img-container"><img src="gallery/1.jpg" alt="1.jpg" loading="eager"></div></div>
-                <div class="gallery-item brutal-card"><div class="gallery-img-container"><img src="gallery/1D8A3893.jpg" alt="1D8A3893.jpg" loading="lazy"></div></div>
-                <div class="gallery-item brutal-card"><div class="gallery-img-container"><img src="gallery/2.jpg" alt="2.jpg" loading="eager"></div></div>
-                <div class="gallery-item brutal-card"><div class="gallery-img-container"><img src="gallery/3.jpg" alt="3.jpg" loading="eager"></div></div>
-                <div class="gallery-item brutal-card"><div class="gallery-img-container"><img src="gallery/4.jpg" alt="4.jpg" loading="eager"></div></div>
-                <div class="gallery-item brutal-card"><div class="gallery-img-container"><img src="gallery/IMG-20250302-WA0109.jpg" alt="IMG-20250302-WA0109.jpg" loading="lazy"></div></div>
-                <div class="gallery-item brutal-card"><div class="gallery-img-container"><img src="gallery/IMG-20250704-WA0089.jpg" alt="IMG-20250704-WA0089.jpg" loading="lazy"></div></div>
-                <div class="gallery-item brutal-card"><div class="gallery-img-container"><img src="gallery/IMG-20250705-WA0062.jpg" alt="IMG-20250705-WA0062.jpg" loading="lazy"></div></div>
-                <div class="gallery-item brutal-card"><div class="gallery-img-container"><img src="gallery/IMG-20250712-WA0111.jpg" alt="IMG-20250712-WA0111.jpg" loading="lazy"></div></div>
-                <div class="gallery-item brutal-card"><div class="gallery-img-container"><img src="gallery/IMG-20250712-WA0117.jpg" alt="IMG-20250712-WA0117.jpg" loading="lazy"></div></div>
-                <div class="gallery-item brutal-card"><div class="gallery-img-container"><img src="gallery/IMG-20250730-WA0151.jpg" alt="IMG-20250730-WA0151.jpg" loading="lazy"></div></div>
-                <div class="gallery-item brutal-card"><div class="gallery-img-container"><img src="gallery/IMG-20250730-WA0153.jpg" alt="IMG-20250730-WA0153.jpg" loading="lazy"></div></div>
-                <div class="gallery-item brutal-card"><div class="gallery-img-container"><img src="gallery/IMG-20250812-WA0145 (1).jpg" alt="IMG-20250812-WA0145 (1).jpg" loading="lazy"></div></div>
-                <div class="gallery-item brutal-card"><div class="gallery-img-container"><img src="gallery/IMG-20260101-WA0121.jpg" alt="IMG-20260101-WA0121.jpg" loading="lazy"></div></div>
-                <div class="gallery-item brutal-card"><div class="gallery-img-container"><img src="gallery/IMG-20260119-WA0017.jpg" alt="IMG-20260119-WA0017.jpg" loading="lazy"></div></div>
-                <div class="gallery-item brutal-card"><div class="gallery-img-container"><img src="gallery/IMG-20260126-WA0360.jpg" alt="IMG-20260126-WA0360.jpg" loading="lazy"></div></div>
-                <div class="gallery-item brutal-card"><div class="gallery-img-container"><img src="gallery/IMG-20260126-WA0362.jpg" alt="IMG-20260126-WA0362.jpg" loading="lazy"></div></div>
-                <div class="gallery-item brutal-card"><div class="gallery-img-container"><img src="gallery/Khm .jpg" alt="Khm .jpg" loading="lazy"></div></div>
-                <div class="gallery-item brutal-card"><div class="gallery-img-container"><img src="gallery/Yess nit Calicut .jpg" alt="Yess nit Calicut .jpg" loading="lazy"></div></div>
-                <div class="gallery-item brutal-card"><div class="gallery-img-container"><img src="gallery/signal.heic" alt="signal.heic" loading="lazy"></div></div>
+                <div class="gallery-item brutal-card">
+                    <div class="gallery-img-container"><img src="gallery/1.jpg" alt="1.jpg" loading="eager"></div>
+                </div>
+                <div class="gallery-item brutal-card">
+                    <div class="gallery-img-container"><img src="gallery/1D8A3893.jpg" alt="1D8A3893.jpg"
+                            loading="lazy"></div>
+                </div>
+                <div class="gallery-item brutal-card">
+                    <div class="gallery-img-container"><img src="gallery/2.jpg" alt="2.jpg" loading="eager"></div>
+                </div>
+                <div class="gallery-item brutal-card">
+                    <div class="gallery-img-container"><img src="gallery/3.jpg" alt="3.jpg" loading="eager"></div>
+                </div>
+                <div class="gallery-item brutal-card">
+                    <div class="gallery-img-container"><img src="gallery/4.jpg" alt="4.jpg" loading="eager"></div>
+                </div>
+                <div class="gallery-item brutal-card">
+                    <div class="gallery-img-container"><img src="gallery/IMG-20250302-WA0109.jpg"
+                            alt="IMG-20250302-WA0109.jpg" loading="lazy"></div>
+                </div>
+                <div class="gallery-item brutal-card">
+                    <div class="gallery-img-container"><img src="gallery/IMG-20250704-WA0089.jpg"
+                            alt="IMG-20250704-WA0089.jpg" loading="lazy"></div>
+                </div>
+                <div class="gallery-item brutal-card">
+                    <div class="gallery-img-container"><img src="gallery/IMG-20250705-WA0062.jpg"
+                            alt="IMG-20250705-WA0062.jpg" loading="lazy"></div>
+                </div>
+                <div class="gallery-item brutal-card">
+                    <div class="gallery-img-container"><img src="gallery/IMG-20250712-WA0111.jpg"
+                            alt="IMG-20250712-WA0111.jpg" loading="lazy"></div>
+                </div>
+                <div class="gallery-item brutal-card">
+                    <div class="gallery-img-container"><img src="gallery/IMG-20250712-WA0117.jpg"
+                            alt="IMG-20250712-WA0117.jpg" loading="lazy"></div>
+                </div>
+                <div class="gallery-item brutal-card">
+                    <div class="gallery-img-container"><img src="gallery/IMG-20250730-WA0151.jpg"
+                            alt="IMG-20250730-WA0151.jpg" loading="lazy"></div>
+                </div>
+                <div class="gallery-item brutal-card">
+                    <div class="gallery-img-container"><img src="gallery/IMG-20250730-WA0153.jpg"
+                            alt="IMG-20250730-WA0153.jpg" loading="lazy"></div>
+                </div>
+                <div class="gallery-item brutal-card">
+                    <div class="gallery-img-container"><img src="gallery/IMG-20250812-WA0145 (1).jpg"
+                            alt="IMG-20250812-WA0145 (1).jpg" loading="lazy"></div>
+                </div>
+                <div class="gallery-item brutal-card">
+                    <div class="gallery-img-container"><img src="gallery/IMG-20260101-WA0121.jpg"
+                            alt="IMG-20260101-WA0121.jpg" loading="lazy"></div>
+                </div>
+                <div class="gallery-item brutal-card">
+                    <div class="gallery-img-container"><img src="gallery/IMG-20260119-WA0017.jpg"
+                            alt="IMG-20260119-WA0017.jpg" loading="lazy"></div>
+                </div>
+                <div class="gallery-item brutal-card">
+                    <div class="gallery-img-container"><img src="gallery/IMG-20260126-WA0360.jpg"
+                            alt="IMG-20260126-WA0360.jpg" loading="lazy"></div>
+                </div>
+                <div class="gallery-item brutal-card">
+                    <div class="gallery-img-container"><img src="gallery/IMG-20260126-WA0362.jpg"
+                            alt="IMG-20260126-WA0362.jpg" loading="lazy"></div>
+                </div>
+                <div class="gallery-item brutal-card">
+                    <div class="gallery-img-container"><img src="gallery/Khm .jpg" alt="Khm .jpg" loading="lazy"></div>
+                </div>
+                <div class="gallery-item brutal-card">
+                    <div class="gallery-img-container"><img src="gallery/Yess nit Calicut .jpg"
+                            alt="Yess nit Calicut .jpg" loading="lazy"></div>
+                </div>
+                <div class="gallery-item brutal-card">
+                    <div class="gallery-img-container"><img src="gallery/signal.heic" alt="signal.heic" loading="lazy">
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -110,7 +178,8 @@
                 <div class="footer-section">
                     <h4>IEEE MBITS</h4>
                     <p>Advancing Technology for Humanity</p>
-                    <p>Empowering the next generation of engineers and innovators through knowledge, networking, and professional development.</p>
+                    <p>Empowering the next generation of engineers and innovators through knowledge, networking, and
+                        professional development.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
@@ -135,11 +204,13 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 IEEE SB MBITS. All rights reserved. Designed and Developed by IEEE SB MBITS Webmasters</p>
+                <p>&copy; 2025 IEEE SB MBITS. All rights reserved. Designed and Developed by IEEE SB MBITS Webmasters
+                </p>
             </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
 </body>
+
 </html>
