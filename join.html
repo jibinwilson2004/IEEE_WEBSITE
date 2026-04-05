@@ -232,9 +232,9 @@
             </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html#home">Home</a></li>
-                <li><a href="index.html#about">About</a></li>
                 <li><a href="execom.html">Office Bearers</a></li>
                 <li><a href="events.html">Activities</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="join.html" class="join-button">Join Now</a></li>
             </ul>
             <div class="mobile-menu" id="mobileMenu">
@@ -312,6 +312,37 @@
         </div>
     </main>
 
+    <!-- Pricing Modal -->
+    <div class="pricing-overlay" id="pricingOverlay">
+        <div class="pricing-card">
+            <div class="discount-badge" style="top: -40px; left: -40px;">
+                <span class="value" style="font-size: 1.6rem; line-height: 1.1;">50% OFF<br>FOR IEEE MEMBERSHIP</span>
+                <span class="label">HALF-YEAR OFFER</span>
+            </div>
+            <button type="button" class="close-pricing" id="closePricing" aria-label="Close pricing">&times;</button>
+            <h3>Membership Pricing</h3>
+            <div class="table-wrapper">
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>Membership Type</th>
+                            <th>Price (USD)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>IEEE Student Membership (Half-Year)</td><td><strong>$7.50</strong></td></tr>
+                        <tr><td>IEEE Computer Society (CS)</td><td><strong>$2.50</strong></td></tr>
+                        <tr><td>IEEE Circuits and Systems Society (CASS – First Time)</td><td><strong>Free</strong></td></tr>
+                        <tr><td>IEEE Circuits and Systems Society (CASS – Renewal)</td><td><strong>$2.50</strong></td></tr>
+                        <tr><td>IEEE Women in Engineering</td><td><strong>Free</strong></td></tr>
+                        <tr><td>IEEE Sensors Council</td><td><strong>Free</strong></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-weight: 800; text-transform: uppercase; font-size: 0.9rem;">* All prices are for half-year membership period.</p>
+        </div>
+    </div>
+
     <div class="popup-overlay" id="popupOverlay" aria-hidden="true">
         <div class="popup-card" id="popupCard" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
             <button type="button" class="close-popup" id="closePopup" aria-label="Close popup">×</button>
@@ -330,10 +361,11 @@
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
-                    <p><a href="index.html#about">About Us</a></p>
+                    <p><a href="index.html#home">Home</a></p>
                     <p><a href="execom.html">Office Bearers</a></p>
                     <p><a href="events.html">Activities</a></p>
-                    <p><a href="index.html#contact">Contact</a></p>
+                    <p><a href="gallery.html">Gallery</a></p>
+                    <p><a href="join.html">Join Now</a></p>
                 </div>
                 <div class="footer-section">
                     <h4>Resources</h4>
@@ -361,6 +393,28 @@
         if (typeof emailjs !== 'undefined' && emailjs.init) {
             emailjs.init('0LbUjqGewEYtLvFkg');
         }
+
+        // Pricing Modal Logic
+        window.addEventListener('DOMContentLoaded', () => {
+            const pricingOverlay = document.getElementById('pricingOverlay');
+            const closePricing = document.getElementById('closePricing');
+
+            // Show modal on load
+            setTimeout(() => {
+                pricingOverlay.classList.add('active');
+            }, 500);
+
+            // Close logic
+            closePricing.addEventListener('click', () => {
+                pricingOverlay.classList.remove('active');
+            });
+
+            pricingOverlay.addEventListener('click', (e) => {
+                if (e.target === pricingOverlay) {
+                    pricingOverlay.classList.remove('active');
+                }
+            });
+        });
 
         document.getElementById('joinForm').addEventListener('submit', function(e) {
             e.preventDefault();

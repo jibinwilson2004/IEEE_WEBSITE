@@ -90,7 +90,7 @@
 
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 
@@ -118,10 +118,9 @@
             </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html#home">Home</a></li>
-                <li><a href="index.html#about">About</a></li>
                 <li><a href="execom.html">Office Bearers</a></li>
                 <li><a href="events.html">Activities</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="join.html" class="join-button">Join Now</a></li>
             </ul>
             <div class="mobile-menu" id="mobileMenu">
@@ -137,7 +136,8 @@
         <div class="hero-visuals" aria-hidden="true">
             <div class="engineering-shape blueprint-grid" data-speed="0.06" data-action="follow"></div>
             <div class="engineering-shape circuit-cluster" data-speed="0.12" data-action="follow"></div>
-            <div class="engineering-shape material-block" data-speed="0.1" data-base="rotate(-6deg)" data-action="repel"></div>
+            <div class="engineering-shape material-block" data-speed="0.1" data-base="rotate(-6deg)"
+                data-action="repel"></div>
             <div class="engineering-shape beam-line" data-speed="0.08" data-action="follow"></div>
             <div class="engineering-shape symbol-badge" data-speed="0.14" data-action="follow">Σ</div>
             <div class="hero-geo geo-circle" data-speed="0.3" data-action="repel"></div>
@@ -151,6 +151,10 @@
         </div>
 
         <header class="hero-content brutal-card">
+            <div class="discount-badge" style="top: -25px; left: -25px; transform: rotate(-10deg);">
+                <span class="value" style="font-size: 1.2rem; line-height: 1.1;">50% OFF<br>FOR IEEE MEMBERSHIP</span>
+                <span class="label">HALF-YEAR</span>
+            </div>
             <h1 class="hero-title">IEEE MBITS</h1>
             <p class="hero-subtitle">Bold Innovation. Technical Leadership.</p>
             <p class="hero-description brutal-border">
@@ -162,7 +166,7 @@
                 <span>Explore More</span>
                 <span class="hero-cta-icon"></span>
             </a>
-        </div>
+            </div>
     </section>
 
     <!-- About Section -->
@@ -183,16 +187,18 @@
                         Kumar A. from the ECE Department. The official inauguration was conducted by Dr. Rajesh M. V,
                         Chairman of the IEEE Kochi Subsection at that time. <br><br>
 
-                        At present, the branch is led by Branch Counselor Dr. Sajin C. S., Assistant Professor in the
-                        Department of Electronics and Communication Engineering (ECE), and Student Branch Chair Abhishek
-                        A. Under their leadership, the branch has grown significantly, now boasting a membership of 188
+                        At present, the branch is led by Branch Counselor Prof. Minu Mary Joy, Assistant Professor in
+                        the
+                        Department of Electrical and Electronics Engineering (ECE), and Student Branch Chair Tisa Tijo.
+                        Under their leadership, the branch has grown significantly, now boasting a membership of 188
                         students across various departments. <br><br>
 
                         Since its inception, IEEE SB MBITS has launched four active Student Branch Chapters (SBCs): the
                         IEEE Signal Processing Society (SPS), the IEEE Circuits and Systems Society (CASS), the IEEE
-                        Women in Engineering (WIE) Affinity Group, and the IEEE Computer Society (CS). These chapters
-                        play a vital role in organizing workshops, technical talks, coding competitions, and hackathons,
-                        fostering an ecosystem of innovation, collaboration, and technical growth within the
+                        Women in Engineering (WIE) Affinity Group,the IEEE Computer Society (CS) and the IEEE Sensor
+                        Council. These chapters play a vital role in organizing workshops, technical talks, coding
+                        competitions, and hackathons, fostering an ecosystem of innovation, collaboration, and technical
+                        growth within the
                         institution.
                     </p>
                 </div>
@@ -281,7 +287,11 @@
 
     <!-- Enhanced Join Now Section -->
     <section class="join-now fade-in section-entrance" id="join-now">
-        <div class="join-container">
+        <div class="join-container" style="position: relative;">
+            <div class="discount-badge" style="top: -40px; left: -40px;">
+                <span class="value" style="font-size: 1.6rem; line-height: 1.1;">50% OFF<br>FOR IEEE MEMBERSHIP</span>
+                <span class="label">HALF-YEAR OFFER</span>
+            </div>
             <div class="join-content">
                 <h2 class="join-title">Join IEEE MBITS</h2>
                 <p class="join-description">
@@ -289,15 +299,14 @@
                     for growth, learning, and innovation. Join IEEE MBITS and connect with a global community of
                     technology leaders and innovators.
                 </p>
-                <a href="https://www.ieee.org/membership/join" class="join-button" target="_blank"
-                    onclick="alert('For membership registration  Contact us for Support')">
+                <a href="./join.html" class="join-button" target="_blank">
                     <span>Join IEEE Now</span>
                     <span class="join-button-icon"></span>
                 </a>
             </div>
         </div>
     </section>
-
+    
     <!-- FAQ Section -->
     <section class="faq fade-in section-entrance" id="faq">
         <div class="faq-container">
@@ -363,14 +372,21 @@
 
     <!-- NEW Contact Grid Layout as requested -->
     <section class="contact fade-in section-entrance" id="contact">
-        <div class="contact-layout-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; max-width: 1400px; margin: 0 auto; padding: 5rem 2rem;">
+        <div class="contact-layout-grid"
+            style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; max-width: 1400px; margin: 0 auto; padding: 5rem 2rem;">
             <!-- Left Tall Box: Map -->
             <div class="brutal-card bg-yellow" style="padding: 2rem; display: flex; flex-direction: column;">
-                <h3 style="font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 900; border-bottom: 4px solid #000; padding-bottom: 1rem; color: #000;">Find Us On Map</h3>
+                <h3
+                    style="font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 900; border-bottom: 4px solid #000; padding-bottom: 1rem; color: #000;">
+                    Find Us On Map</h3>
                 <div style="margin-bottom: 1.5rem; border: 4px solid #000; flex-grow: 1;">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.499029664069!2d76.6711249!3d10.058134200000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b07e8c21773f2f9%3A0xf8cc8247d7da7a9c!2sMar%20Baselios%20Institute%20of%20Technology%20and%20Science!5e0!3m2!1sen!2sin!4v1753464726332!5m2!1sen!2sin" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.499029664069!2d76.6711249!3d10.058134200000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b07e8c21773f2f9%3A0xf8cc8247d7da7a9c!2sMar%20Baselios%20Institute%20of%20Technology%20and%20Science!5e0!3m2!1sen!2sin!4v1753464726332!5m2!1sen!2sin"
+                        width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-                <div style="font-weight: 800; font-size: 1.2rem; background: #fff; padding: 1rem; border: 3px dashed #000; color: #000;">
+                <div
+                    style="font-weight: 800; font-size: 1.2rem; background: #fff; padding: 1rem; border: 3px dashed #000; color: #000;">
                     📍 Mar Baselios Institute of Technology & Science<br>
                     Kothamangalam, Kerala 686651
                 </div>
@@ -379,22 +395,37 @@
             <div style="display: flex; flex-direction: column; gap: 2rem;">
                 <!-- Right Top Box: Contact Info -->
                 <div class="brutal-card bg-pink" style="padding: 2rem;">
-                    <h3 style="font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 900; color: #000;">Get In Touch</h3>
-                    <div style="font-weight: 800; font-size: 1.2rem; display: flex; flex-direction: column; gap: 1rem; background: #fff; border: 4px solid #000; padding: 1.5rem; color: #000;">
-                        <div style="display: flex; gap: 1rem; align-items: center;"><span style="font-size: 2rem;">📧</span> ieeesbmbits@gmail.com</div>
-                        <div style="display: flex; gap: 1rem; align-items: center;"><span style="font-size: 2rem;">📱</span> +91 7907863486</div>
-                        <div style="display: flex; gap: 1rem; align-items: center;"><span style="font-size: 2rem;">🕒</span> Mon-Fri, 9:00 AM - 5:00 PM</div>
+                    <h3 style="font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 900; color: #000;">Get In Touch
+                    </h3>
+                    <div
+                        style="font-weight: 800; font-size: 1.2rem; display: flex; flex-direction: column; gap: 1rem; background: #fff; border: 4px solid #000; padding: 1.5rem; color: #000;">
+                        <div style="display: flex; gap: 1rem; align-items: center;"><span
+                                style="font-size: 2rem;">📧</span> ieeesbmbits@gmail.com</div>
+                        <div style="display: flex; gap: 1rem; align-items: center;"><span
+                                style="font-size: 2rem;">📱</span> +91 7907863486</div>
+                        <div style="display: flex; gap: 1rem; align-items: center;"><span
+                                style="font-size: 2rem;">🕒</span> Mon-Fri, 9:00 AM - 5:00 PM</div>
                     </div>
                 </div>
 
                 <!-- Right Bottom Box: Socials -->
                 <div class="brutal-card bg-lime" style="padding: 2rem; flex-grow: 1;">
                     <h3 style="font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 900; color: #000;">Follow Us</h3>
-                    <p style="font-weight: 800; margin-bottom: 1.5rem; font-size: 1.2rem; background: #fff; padding: 1rem; border: 4px solid #000; color: #000;">Stay updated with our latest events and activities on our social channels!</p>
-                    <div class="social-links" style="margin-top: 0; display: flex; gap: 1.5rem; justify-content: flex-start;">
-                        <a href="https://www.linkedin.com/company/ieee-student-branch-mbits" target="_blank" class="social-link brutal-card" style="width: 60px; height: 60px; font-size: 2rem; border-radius: 0; background: #fff; color: #000;"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://www.instagram.com/ieeesbmbits/" target="_blank" class="social-link brutal-card" style="width: 60px; height: 60px; font-size: 2rem; border-radius: 0; background: #fff; color: #000;"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/@ieeesbmbits" target="_blank" class="social-link brutal-card" style="width: 60px; height: 60px; font-size: 2rem; border-radius: 0; background: #fff; color: #000;"><i class="fab fa-youtube"></i></a>
+                    <p
+                        style="font-weight: 800; margin-bottom: 1.5rem; font-size: 1.2rem; background: #fff; padding: 1rem; border: 4px solid #000; color: #000;">
+                        Stay updated with our latest events and activities on our social channels!</p>
+                    <div class="social-links"
+                        style="margin-top: 0; display: flex; gap: 1.5rem; justify-content: flex-start;">
+                        <a href="https://www.linkedin.com/company/ieee-student-branch-mbits" target="_blank"
+                            class="social-link brutal-card"
+                            style="width: 60px; height: 60px; font-size: 2rem; border-radius: 0; background: #fff; color: #000;"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/ieeesbmbits/" target="_blank" class="social-link brutal-card"
+                            style="width: 60px; height: 60px; font-size: 2rem; border-radius: 0; background: #fff; color: #000;"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@ieeesbmbits" target="_blank" class="social-link brutal-card"
+                            style="width: 60px; height: 60px; font-size: 2rem; border-radius: 0; background: #fff; color: #000;"><i
+                                class="fab fa-youtube"></i></a>
                     </div>
                 </div>
             </div>
@@ -413,10 +444,11 @@
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
-                    <p><a href="#about">About Us</a></p>
+                    <p><a href="index.html#home">Home</a></p>
                     <p><a href="execom.html">Office Bearers</a></p>
                     <p><a href="events.html">Activities</a></p>
-                    <p><a href="#contact">Contact</a></p>
+                    <p><a href="gallery.html">Gallery</a></p>
+                    <p><a href="join.html">Join Now</a></p>
                 </div>
                 <div class="footer-section">
                     <h4>Resources</h4>
