@@ -112,7 +112,6 @@ h1, h2, h3, h4, h5 { font-family: 'Orbitron', 'Space Grotesk', sans-serif; font-
 .logo img {
     height: 50px;
     object-fit: contain;
-    filter: drop-shadow(4px 4px 0px #000);
 }
 
 .nav-links {
