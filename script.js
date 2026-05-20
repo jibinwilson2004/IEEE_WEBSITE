@@ -14,6 +14,42 @@ window.addEventListener('load', function () {
     }
 });
 
+function initCursorPixelTrail() {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+
+    if (reducedMotion || coarsePointer) return;
+
+    let lastPixelTime = 0;
+    const pixelDelay = 32;
+
+    window.addEventListener('pointermove', (event) => {
+        if (event.pointerType && event.pointerType !== 'mouse') return;
+
+        const now = window.performance.now();
+        if (now - lastPixelTime < pixelDelay) return;
+        lastPixelTime = now;
+
+        const pixel = document.createElement('span');
+        const size = Math.random() > 0.72 ? 12 : 8;
+        const offsetX = (Math.random() - 0.5) * 16;
+        const offsetY = (Math.random() - 0.5) * 12;
+
+        pixel.className = 'cursor-pixel';
+        pixel.style.width = `${size}px`;
+        pixel.style.height = `${size}px`;
+        pixel.style.left = `${event.clientX + offsetX}px`;
+        pixel.style.top = `${event.clientY + offsetY}px`;
+        pixel.style.setProperty('--pixel-fall', `${22 + Math.random() * 22}px`);
+        pixel.style.setProperty('--pixel-drift', `${(Math.random() - 0.5) * 18}px`);
+
+        document.body.appendChild(pixel);
+        pixel.addEventListener('animationend', () => pixel.remove(), { once: true });
+    }, { passive: true });
+}
+
+initCursorPixelTrail();
+
 // Scroll indicator
 const scrollIndicator = document.getElementById('scrollIndicator');
 if (scrollIndicator) {
