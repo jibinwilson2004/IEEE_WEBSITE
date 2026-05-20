@@ -423,7 +423,7 @@
                         <a href="https://www.instagram.com/ieeesbmbits/" target="_blank" class="social-link brutal-card"
                             style="width: 60px; height: 60px; font-size: 2rem; border-radius: 0; background: #fff; color: #000;"><i
                                 class="fab fa-instagram"></i></a>
-                        <a href="https://youtube.com/@ieeembitssb?sub_confirmation=1" target="_blank" class="social-link brutal-card"
+                        <a href="https://www.youtube.com/@ieeesbmbits" target="_blank" class="social-link brutal-card"
                             style="width: 60px; height: 60px; font-size: 2rem; border-radius: 0; background: #fff; color: #000;"><i
                                 class="fab fa-youtube"></i></a>
                     </div>
@@ -471,6 +471,35 @@
             </div>
         </div>
     </footer>
+
+    <!-- Gemini Chatbot -->
+    <div class="gemini-chatbot" id="geminiChatbot">
+        <div class="gemini-chatbot-panel" role="dialog" aria-labelledby="geminiChatbotTitle">
+            <div class="gemini-chatbot-header">
+                <div class="gemini-chatbot-title" id="geminiChatbotTitle">
+                    <i class="fas fa-robot" aria-hidden="true"></i>
+                    <span>IEEE MBITS Assistant</span>
+                </div>
+                <button class="gemini-chatbot-close" id="geminiChatbotClose" type="button" aria-label="Close chatbot">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="gemini-chatbot-messages" id="geminiChatbotMessages" aria-live="polite">
+                <div class="gemini-message bot">Hi! Ask me about IEEE MBITS, membership, events, or student branch chapters.</div>
+            </div>
+            <form class="gemini-chatbot-form" id="geminiChatbotForm">
+                <input class="gemini-chatbot-input" id="geminiChatbotInput" type="text"
+                    placeholder="Type your question..." autocomplete="off" required>
+                <button class="gemini-chatbot-send" type="submit" aria-label="Send message">
+                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                </button>
+            </form>
+        </div>
+        <button class="gemini-chatbot-toggle" id="geminiChatbotToggle" type="button" aria-label="Open chatbot">
+            <span class="gemini-chatbot-prompt">Hey! How can I help you today?</span>
+            <i class="fas fa-comments" aria-hidden="true"></i>
+        </button>
+    </div>
 
     <!-- Custom Script -->
     <script src="script.js"></script>

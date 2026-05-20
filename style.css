@@ -1209,3 +1209,201 @@ h1, h2, h3, h4, h5 { font-family: 'Orbitron', 'Space Grotesk', sans-serif; font-
     0%, 100% { transform: rotate(-12deg) translateY(0); }
     50% { transform: rotate(-8deg) translateY(-15px); }
 }
+
+/* Gemini Chatbot */
+.gemini-chatbot {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1200;
+    font-family: 'Space Grotesk', Arial, sans-serif;
+}
+
+.gemini-chatbot-panel {
+    width: min(380px, calc(100vw - 32px));
+    height: min(560px, calc(100vh - 110px));
+    display: none;
+    flex-direction: column;
+    background: #fff;
+    border: 4px solid #000;
+    box-shadow: 8px 8px 0 #000;
+    overflow: hidden;
+}
+
+.gemini-chatbot.open .gemini-chatbot-panel {
+    display: flex;
+}
+
+.gemini-chatbot-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    background: #ffde59;
+    border-bottom: 4px solid #000;
+    color: #000;
+}
+
+.gemini-chatbot-title {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-weight: 900;
+    line-height: 1.1;
+}
+
+.gemini-chatbot-title i {
+    font-size: 1.3rem;
+}
+
+.gemini-chatbot-close,
+.gemini-chatbot-toggle,
+.gemini-chatbot-send {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #000;
+    background: #fff;
+    color: #000;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 #000;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.gemini-chatbot-close:hover,
+.gemini-chatbot-toggle:hover,
+.gemini-chatbot-send:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #000;
+}
+
+.gemini-chatbot-close {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+}
+
+.gemini-chatbot-messages {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: #f7f7f7;
+    overflow-y: auto;
+}
+
+.gemini-message {
+    max-width: 88%;
+    padding: 0.75rem 0.9rem;
+    border: 3px solid #000;
+    color: #000;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.gemini-message.bot {
+    align-self: flex-start;
+    background: #a7f3d0;
+}
+
+.gemini-message.user {
+    align-self: flex-end;
+    background: #c7d2fe;
+}
+
+.gemini-chatbot-form {
+    display: flex;
+    gap: 0.6rem;
+    padding: 1rem;
+    background: #fff;
+    border-top: 4px solid #000;
+}
+
+.gemini-chatbot-input {
+    flex: 1;
+    min-width: 0;
+    border: 3px solid #000;
+    padding: 0.75rem;
+    font: inherit;
+    font-weight: 700;
+    color: #000;
+    background: #fff;
+    outline: none;
+}
+
+.gemini-chatbot-input:focus {
+    box-shadow: inset 0 0 0 2px #ffde59;
+}
+
+.gemini-chatbot-send {
+    width: 48px;
+    min-width: 48px;
+    height: 48px;
+    background: #ff6b35;
+}
+
+.gemini-chatbot-toggle {
+    position: relative;
+    width: 68px;
+    height: 68px;
+    margin-left: auto;
+    margin-top: 16px;
+    background: #ff6b35;
+    font-size: 1.65rem;
+}
+
+.gemini-chatbot-prompt {
+    position: absolute;
+    right: 82px;
+    bottom: 12px;
+    width: max-content;
+    max-width: min(260px, calc(100vw - 132px));
+    padding: 0.75rem 0.9rem;
+    background: #fff;
+    border: 3px solid #000;
+    box-shadow: 5px 5px 0 #000;
+    color: #000;
+    font-size: 0.9rem;
+    font-weight: 900;
+    line-height: 1.25;
+    text-align: left;
+    pointer-events: none;
+}
+
+.gemini-chatbot-prompt::after {
+    content: '';
+    position: absolute;
+    right: -11px;
+    bottom: 14px;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    border-top: 3px solid #000;
+    border-right: 3px solid #000;
+    transform: rotate(45deg);
+}
+
+.gemini-chatbot.open .gemini-chatbot-toggle {
+    display: none;
+}
+
+@media (max-width: 520px) {
+    .gemini-chatbot {
+        right: 16px;
+        bottom: 16px;
+    }
+
+    .gemini-chatbot-panel {
+        height: min(520px, calc(100vh - 88px));
+    }
+
+    .gemini-chatbot-prompt {
+        right: 76px;
+        max-width: calc(100vw - 124px);
+        font-size: 0.82rem;
+    }
+}

@@ -385,4 +385,106 @@ function renderActivitiesGrid() {
 document.addEventListener('DOMContentLoaded', function () {
     createInfiniteBenefitsLoop();
     renderActivitiesGrid();
+    initGeminiChatbot();
 });
+
+const GEMINI_API_KEY = 'AIzaSyBSKg6faIvTSXGDuTas4fNfyKTdP38Pqjk';
+const GEMINI_MODEL = 'gemini-2.5-flash';
+
+const ieeeMbitsContext = `
+You are the IEEE MBITS website assistant.
+Answer briefly and helpfully for visitors of IEEE Student Branch at Mar Baselios Institute of Technology and Science, Kothamangalam, Kerala.
+Known facts:
+- IEEE MBITS Student Branch was established on 3 July 2022.
+- Contact email: ieeesbmbits@gmail.com.
+- Phone: +91 7907863486.
+- Active groups include SPS, CASS, WIE, Computer Society, and Sensor Council.
+- The branch organizes workshops, guest lectures, hackathons, research activities, networking events, and innovation programs.
+- For joining, direct users to the Join Now page.
+If you are unsure, ask the visitor to contact the branch directly.
+`;
+
+function initGeminiChatbot() {
+    const geminiChatbot = document.getElementById('geminiChatbot');
+    const geminiChatbotToggle = document.getElementById('geminiChatbotToggle');
+    const geminiChatbotClose = document.getElementById('geminiChatbotClose');
+    const geminiChatbotForm = document.getElementById('geminiChatbotForm');
+    const geminiChatbotInput = document.getElementById('geminiChatbotInput');
+    const geminiChatbotMessages = document.getElementById('geminiChatbotMessages');
+
+    if (!geminiChatbot || !geminiChatbotToggle || !geminiChatbotClose || !geminiChatbotForm || !geminiChatbotInput || !geminiChatbotMessages) {
+        return;
+    }
+
+    function addGeminiMessage(text, sender) {
+        const message = document.createElement('div');
+        message.className = `gemini-message ${sender}`;
+        message.textContent = text;
+        geminiChatbotMessages.appendChild(message);
+        geminiChatbotMessages.scrollTop = geminiChatbotMessages.scrollHeight;
+        return message;
+    }
+
+    async function askGemini(userMessage) {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-goog-api-key': GEMINI_API_KEY
+            },
+            body: JSON.stringify({
+                contents: [{
+                    role: 'user',
+                    parts: [{
+                        text: `${ieeeMbitsContext}\nVisitor question: ${userMessage}`
+                    }]
+                }]
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            const errorMessage = data.error?.message || 'Gemini API request failed.';
+            throw new Error(errorMessage);
+        }
+
+        return data.candidates?.[0]?.content?.parts?.map(part => part.text || '').join('').trim()
+            || 'I could not generate a response. Please try again.';
+    }
+
+    geminiChatbotToggle.addEventListener('click', () => {
+        geminiChatbot.classList.add('open');
+        geminiChatbotInput.focus();
+    });
+
+    geminiChatbotClose.addEventListener('click', () => {
+        geminiChatbot.classList.remove('open');
+    });
+
+    geminiChatbotForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const userMessage = geminiChatbotInput.value.trim();
+        if (!userMessage) return;
+
+        addGeminiMessage(userMessage, 'user');
+        geminiChatbotInput.value = '';
+        geminiChatbotInput.disabled = true;
+
+        const loadingMessage = addGeminiMessage('Thinking...', 'bot');
+
+        try {
+            if (!GEMINI_API_KEY || GEMINI_API_KEY === 'PASTE_YOUR_GEMINI_API_KEY_HERE') {
+                throw new Error('Add your Gemini API key in script.js first.');
+            }
+
+            loadingMessage.textContent = await askGemini(userMessage);
+        } catch (error) {
+            loadingMessage.textContent = `Sorry, ${error.message}`;
+        } finally {
+            geminiChatbotInput.disabled = false;
+            geminiChatbotInput.focus();
+        }
+    });
+}
