@@ -48,7 +48,7 @@ function initCursorPixelTrail() {
     }, { passive: true });
 }
 
-initCursorPixelTrail();
+//initCursorPixelTrail();
 
 // Scroll indicator
 const scrollIndicator = document.getElementById('scrollIndicator');
