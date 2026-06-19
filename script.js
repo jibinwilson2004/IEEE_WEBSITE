@@ -365,12 +365,96 @@ const activitiesData = [
         title: 'PCB Design Workshop',
         description: 'A 3 day PCB design workshop in collaboration with industrial experts.'
     },
+    {
+        date: 'Feb 2026',
+        image: 'events/ARDUINO 101 WORKSHOP/ARD.jpg',
+        title: 'ARDUINO 101 WORKSHOP',
+        description: 'A workshop introducing the fundamentals of Arduino, microcontrollers, and hands-on circuit design.'
+    },
+    {
+        date: 'Feb 2026',
+        image: 'events/cad/poster.png',
+        title: 'cad',
+        description: 'A CAD Lab Workshop introducing Computer-Aided Design, drawing commands, and 2D modeling.'
+    },
+    {
+        date: 'Mar 2026',
+        image: 'events/Digital System Design using Verilog CASS event/Posters & videos/USING VERILOG.png',
+        title: 'Digital System Design using Verilog CASS event',
+        description: 'A workshop on digital system design using Verilog HDL, focusing on VLSI design fundamentals.'
+    },
+    {
+        date: 'Feb 2026',
+        image: 'events/Electrical Quiz Competition/poster.jpg',
+        title: 'Electrical Quiz Competition',
+        description: 'A competitive quiz evaluating students\' knowledge in circuit theory, electronics, and technical awareness.'
+    },
+    {
+        date: 'Feb 2026',
+        image: 'events/Hack,Demo,Defend/poster.png',
+        title: 'Hack,Demo,Defend',
+        description: 'A hands-on workshop focused on cybersecurity fundamentals, ethical hacking, and defense strategies.'
+    },
+    {
+        date: 'Apr 2026',
+        image: 'events/IEEE SPS Scholarship Guidance Session/poster.jpeg',
+        title: 'IEEE SPS Scholarship Guidance Session',
+        description: 'An informative session providing guidance on IEEE SPS scholarships, eligibility, and application procedures.'
+    },
+    {
+        date: 'Feb 2026',
+        image: 'events/PI STARK - Raspberry Pi Workshop/poster.jpeg',
+        title: 'PI STARK - Raspberry Pi Workshop',
+        description: 'An introduction to Raspberry Pi architecture, programming, IoT applications, and GPIO interfacing.'
+    },
+    {
+        date: 'Feb 2026',
+        image: 'events/Poster and Logo making competition/poster.jpg',
+        title: 'Poster and Logo making competition',
+        description: 'A creative competition to design posters and logos based on engineering and tech fest themes.'
+    },
+    {
+        date: 'Feb 2026',
+        image: 'events/SKYFORGE_ DRONE WORKSHOP/SKY1.jpg',
+        title: 'SKYFORGE_ DRONE WORKSHOP',
+        description: 'A workshop introducing drone technology fundamentals, quadcopter assembly, and operation.'
+    },
+    {
+        date: 'Feb 2026',
+        image: 'events/Think Tank (Ideathon)/poster.jpg',
+        title: 'Think Tank (Ideathon)',
+        description: 'An ideathon promoting innovative thinking, technical creativity, and practical problem-solving.'
+    },
+    {
+        date: 'Feb 2026',
+        image: 'events/exec.jpg',
+        title: 'Vibe.exe',
+        description: 'A hands-on workshop on modern web development practices, emerging technologies, and IT industry trends.'
+    },
+    {
+        date: 'Apr 2026',
+        image: 'events/Vishu Photography Contest/Poster.jpg',
+        title: 'Vishu Photography Contest',
+        description: 'A creative photography contest celebrating the festive spirit of Vishu through capture of moments.'
+    },
+    {
+        date: 'Feb 2026',
+        image: 'events/VOLTERA- Bulb Making Workshop/poster.jpeg',
+        title: 'VOLTERA- Bulb Making Workshop',
+        description: 'A practical, hands-on workshop covering bulb assembly, lighting technology, and safety practices.'
+    },
+    {
+        date: 'Feb 2026',
+        image: 'events/wiring wizard/poster.png',
+        title: 'wiring wizard',
+        description: 'A technical wiring competition testing students\' circuit design, speed, accuracy, and safety adherence.'
+    }
 ];
 
 // Function to create infinite loop for benefits
 function createInfiniteBenefitsLoop() {
     const benefitsTrack = document.getElementById('benefitsTrack');
-    if(!benefitsTrack) return;
+    if (!benefitsTrack) return;
     const copies = 3;
     const colors = ['bg-pink', 'bg-blue', 'bg-lime', 'bg-yellow', 'bg-lavender'];
 
@@ -396,7 +480,7 @@ function createInfiniteBenefitsLoop() {
 // Function to render normal distribution of activities
 function renderActivitiesGrid() {
     const eventsGrid = document.getElementById('eventsGrid');
-    if(!eventsGrid) return;
+    if (!eventsGrid) return;
     const colors = ['bg-yellow', 'bg-lime', 'bg-pink', 'bg-lavender', 'bg-blue'];
 
     activitiesData.forEach((activity, index) => {
