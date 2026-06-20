@@ -167,14 +167,29 @@ document.getElementById('galleryForm')?.addEventListener('submit', async functio
     }
 
     setLoading('gallerySubmitBtn', true);
+    showMessage('gallerySuccessMsg', '⏳ Processing...');
     let srcValue = '';
 
     try {
         if (galleryFile?.files?.length) {
             // Upload to Supabase Storage → get public URL
             if (warnEl) warnEl.style.display = 'none';
-            showMessage('gallerySuccessMsg', 'Uploading image...');
-            srcValue = await uploadFileToStorage(galleryFile.files[0]);
+            showMessage('gallerySuccessMsg', '⬆️ Uploading image to cloud...');
+            try {
+                srcValue = await uploadFileToStorage(galleryFile.files[0]);
+            } catch (uploadErr) {
+                // Storage bucket might not exist yet
+                const msg = uploadErr.message || '';
+                if (msg.includes('Bucket not found') || msg.includes('bucket') || msg.includes('storage')) {
+                    showMessage('galleryErrorMsg',
+                        '❌ Storage bucket not found. Go to Supabase → Storage → New Bucket → name it "gallery" → check Public → Create.',
+                        'error');
+                } else {
+                    showMessage('galleryErrorMsg', '❌ Upload failed: ' + msg, 'error');
+                }
+                setLoading('gallerySubmitBtn', false);
+                return;
+            }
         } else {
             srcValue = normalizeImageUrl(imageUrlInput);
             if (!srcValue) {
@@ -185,14 +200,25 @@ document.getElementById('galleryForm')?.addEventListener('submit', async functio
         }
 
         const { error } = await supabaseClient.from('gallery_images').insert([{ src: srcValue, alt: altText }]);
-        if (error) throw error;
+        if (error) {
+            // Table might not exist yet
+            if (error.message.includes('relation') || error.message.includes('does not exist') || error.code === '42P01') {
+                showMessage('galleryErrorMsg',
+                    '❌ Table not found. Run the SQL setup in Supabase → SQL Editor first.',
+                    'error');
+            } else {
+                showMessage('galleryErrorMsg', '❌ DB error: ' + error.message, 'error');
+            }
+            setLoading('gallerySubmitBtn', false);
+            return;
+        }
 
         this.reset();
         if (warnEl) warnEl.style.display = 'none';
         showMessage('gallerySuccessMsg', '✅ Image added! It will now appear for ALL visitors on the gallery page.');
         loadGalleryAdmin();
     } catch (err) {
-        showMessage('galleryErrorMsg', 'Error adding image: ' + err.message, 'error');
+        showMessage('galleryErrorMsg', '❌ Unexpected error: ' + err.message, 'error');
     } finally {
         setLoading('gallerySubmitBtn', false);
     }

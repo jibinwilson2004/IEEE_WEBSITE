@@ -1,5 +1,5 @@
 // ============================================================
-// Gallery Script — reads from Supabase, falls back to defaults
+// Gallery Script — defaults always shown + Supabase images appended
 // ============================================================
 
 const defaultGalleryImages = [
@@ -58,18 +58,8 @@ function renderGalleryGrid(images) {
         img.alt = image.alt || 'Gallery photo';
         img.loading = index < 5 ? 'eager' : 'lazy';
         img.onerror = function () {
-            this.src = 'https://placehold.co/400x300?text=Image+Error';
-            this.alt = 'Broken image';
-            if (!this.nextElementSibling || !this.nextElementSibling.classList.contains('broken-image-link')) {
-                const linkNote = document.createElement('div');
-                linkNote.className = 'broken-image-link';
-                linkNote.innerHTML = `
-                    <p style="margin:0.75rem 0 0; font-size:0.9rem; color:#111; background:#fff; padding:0.5rem; border:2px dashed #000;">
-                        Unable to load image. <a href="${encodeURI(image.src)}" target="_blank" rel="noopener noreferrer">View image</a>
-                    </p>
-                `;
-                this.parentElement.appendChild(linkNote);
-            }
+            // Silently hide broken images instead of showing error placeholder
+            this.closest('.gallery-item') && (this.closest('.gallery-item').style.display = 'none');
         };
 
         const container = document.createElement('div');
@@ -80,27 +70,33 @@ function renderGalleryGrid(images) {
     });
 }
 
-// Fetch gallery images from Supabase, fall back to defaults if empty/error
+// Fetch gallery images from Supabase and MERGE with defaults
+// Defaults always show; Supabase images are appended after them
 async function loadGallery() {
-    showGalleryLoading();
+    // Render defaults immediately (fast, no waiting)
+    renderGalleryGrid(defaultGalleryImages);
 
     try {
+        if (typeof supabaseClient === 'undefined') return;
+
         const { data, error } = await supabaseClient
             .from('gallery_images')
             .select('id, src, alt')
             .order('created_at', { ascending: true });
 
-        if (error) throw error;
+        if (error) {
+            console.warn('Supabase gallery error:', error.message);
+            return; // Keep showing defaults
+        }
 
         if (data && data.length > 0) {
-            renderGalleryGrid(data);
-        } else {
-            // Supabase table is empty — show hardcoded defaults
-            renderGalleryGrid(defaultGalleryImages);
+            // Merge: defaults first, then admin-added images appended after
+            renderGalleryGrid([...defaultGalleryImages, ...data]);
         }
+        // If Supabase is empty, defaults are already showing — do nothing
     } catch (err) {
-        console.warn('Supabase gallery fetch failed, using defaults:', err.message);
-        renderGalleryGrid(defaultGalleryImages);
+        console.warn('Supabase gallery fetch failed, showing defaults only:', err.message);
+        // Defaults already rendered above — nothing more to do
     }
 }
 
