@@ -450,11 +450,60 @@ const activitiesData = [
         description: 'A technical wiring competition testing students\' circuit design, speed, accuracy, and safety adherence.'
     },
     {
-        date: 'Mar 2026',
-        image: 'events/EAS-CASS/Poster.jpg',
-        title: 'EAS-CASS',
-        description: 'A technical wiring competition testing students\' circuit design, speed, accuracy, and safety adherence.'
+        date: 'Jun 2026',
+        image: 'events/GIT.webp',
+        title: 'Introduction to Git and Github',
+        description: 'A hands-on workshop covering the fundamentals of version control, branching, merging, and collaborative workflows.'
+    },
+    {
+        date: 'Jun 2025',
+        image: 'events/informatyka.jpg',
+        title: 'Quantum Computing Webinar',
+        description: 'A webinar exploring the fundamentals of quantum computing and its potential applications in various fields.'
+    },
+    {
+        date: 'Dec 2025',
+        image: 'events/KHM.webp',
+        title: 'Kochi Hub Meet 2025',
+        description: 'The IEEE Kochi Hub Meet is a flagship student engineering and networking event held on December 13–14, 2025 at the Mar Baselios Institute of Science and Technology (MBITS) in Kerala.'
+    },
+    {
+        date: 'Jun 2025',
+        image: 'events/linkdn.jpg',
+        title: 'Linkdin profile building',
+        description: 'A webinar covering the fundamentals of building LinkedIn profile and optimization'
+    },
+    {
+        date: 'Jul 2025',
+        image: 'events/mech.jpg',
+        title: 'Mechmania',
+        description: 'Training session for women in handling vehicle breakdown'
+    },
+    {
+        date: 'Jun 2026',
+        image: 'events/skillhunr.webp',
+        title: 'Skill Hunt',
+        description: 'A session on Technical interview skills '
+    },
+    {
+        date: 'Jan 2026',
+        image: 'events/solutio.webp',
+        title: 'Solutio',
+        description: 'A RFID based project competetion in collabration with IEEE RFID Kerala Chapter '
+    },
+    {
+        date: 'Apr 2026',
+        image: 'events/Spsday.webp',
+        title: 'Poster Design Competition',
+        description: 'A poster design competition in collabration with IEEE Signal Processing Society Kerala Chapter '
+    },
+    {
+        date: 'Apr 2026',
+        image: 'events/Spsday.webp',
+        title: 'Poster Design Competition',
+        description: 'A poster design competition as part of IEEE SPS Day '
     }
+
 ];
 
 // Function to create infinite loop for benefits
