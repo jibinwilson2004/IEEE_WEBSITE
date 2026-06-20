@@ -525,12 +525,12 @@ async function loadActivitiesFromSupabase() {
         if (data && data.length > 0) {
             renderActivitiesGrid(data);
         } else {
-            // Supabase table empty — show hardcoded defaults
-            renderActivitiesGrid(activitiesData);
+            // Supabase table empty — show hardcoded defaults (newest first)
+            renderActivitiesGrid([...activitiesData].reverse());
         }
     } catch (err) {
         console.warn('Supabase events fetch failed, using defaults:', err.message);
-        renderActivitiesGrid(activitiesData);
+        renderActivitiesGrid([...activitiesData].reverse());
     }
 }
 
