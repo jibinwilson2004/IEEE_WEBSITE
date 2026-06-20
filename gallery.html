@@ -27,6 +27,7 @@
                 <li><a href="/events.html">Activities</a></li>
                 <li><a href="/gallery.html">Gallery</a></li>
                 <li><a href="/join.html" class="join-button">Join Now</a></li>
+                <li><a href="/admin.html" style="font-size: 0.8rem; opacity: 0.6; margin-left: 1rem;">⚙️</a></li>
             </ul>
             <div class="mobile-menu" id="mobileMenu">
                 <span></span>
@@ -91,83 +92,8 @@
                 }
             </style>
 
-            <div class="masonry-grid">
-                <!-- All 23 images from /gallery folder -->
-                <div class="gallery-item brutal-card">
-                    <div class="gallery-img-container"><img src="gallery/1.jpg" alt="1.jpg" loading="eager"></div>
-                </div>
-                <div class="gallery-item brutal-card">
-                    <div class="gallery-img-container"><img src="gallery/1D8A3893.jpg" alt="1D8A3893.jpg"
-                            loading="lazy"></div>
-                </div>
-                <div class="gallery-item brutal-card">
-                    <div class="gallery-img-container"><img src="gallery/2.jpg" alt="2.jpg" loading="eager"></div>
-                </div>
-                <div class="gallery-item brutal-card">
-                    <div class="gallery-img-container"><img src="gallery/3.jpg" alt="3.jpg" loading="eager"></div>
-                </div>
-                <div class="gallery-item brutal-card">
-                    <div class="gallery-img-container"><img src="gallery/4.jpg" alt="4.jpg" loading="eager"></div>
-                </div>
-                <div class="gallery-item brutal-card">
-                    <div class="gallery-img-container"><img src="gallery/IMG-20250302-WA0109.jpg"
-                            alt="IMG-20250302-WA0109.jpg" loading="lazy"></div>
-                </div>
-                <div class="gallery-item brutal-card">
-                    <div class="gallery-img-container"><img src="gallery/IMG-20250704-WA0089.jpg"
-                            alt="IMG-20250704-WA0089.jpg" loading="lazy"></div>
-                </div>
-                <div class="gallery-item brutal-card">
-                    <div class="gallery-img-container"><img src="gallery/IMG-20250705-WA0062.jpg"
-                            alt="IMG-20250705-WA0062.jpg" loading="lazy"></div>
-                </div>
-                <div class="gallery-item brutal-card">
-                    <div class="gallery-img-container"><img src="gallery/IMG-20250712-WA0111.jpg"
-                            alt="IMG-20250712-WA0111.jpg" loading="lazy"></div>
-                </div>
-                <div class="gallery-item brutal-card">
-                    <div class="gallery-img-container"><img src="gallery/IMG-20250712-WA0117.jpg"
-                            alt="IMG-20250712-WA0117.jpg" loading="lazy"></div>
-                </div>
-                <div class="gallery-item brutal-card">
-                    <div class="gallery-img-container"><img src="gallery/IMG-20250730-WA0151.jpg"
-                            alt="IMG-20250730-WA0151.jpg" loading="lazy"></div>
-                </div>
-                <div class="gallery-item brutal-card">
-                    <div class="gallery-img-container"><img src="gallery/IMG-20250730-WA0153.jpg"
-                            alt="IMG-20250730-WA0153.jpg" loading="lazy"></div>
-                </div>
-                <div class="gallery-item brutal-card">
-                    <div class="gallery-img-container"><img src="gallery/IMG-20250812-WA0145 (1).jpg"
-                            alt="IMG-20250812-WA0145 (1).jpg" loading="lazy"></div>
-                </div>
-                <div class="gallery-item brutal-card">
-                    <div class="gallery-img-container"><img src="gallery/IMG-20260101-WA0121.jpg"
-                            alt="IMG-20260101-WA0121.jpg" loading="lazy"></div>
-                </div>
-                <div class="gallery-item brutal-card">
-                    <div class="gallery-img-container"><img src="gallery/IMG-20260119-WA0017.jpg"
-                            alt="IMG-20260119-WA0017.jpg" loading="lazy"></div>
-                </div>
-                <div class="gallery-item brutal-card">
-                    <div class="gallery-img-container"><img src="gallery/IMG-20260126-WA0360.jpg"
-                            alt="IMG-20260126-WA0360.jpg" loading="lazy"></div>
-                </div>
-                <div class="gallery-item brutal-card">
-                    <div class="gallery-img-container"><img src="gallery/IMG-20260126-WA0362.jpg"
-                            alt="IMG-20260126-WA0362.jpg" loading="lazy"></div>
-                </div>
-                <div class="gallery-item brutal-card">
-                    <div class="gallery-img-container"><img src="gallery/Khm .jpg" alt="Khm .jpg" loading="lazy"></div>
-                </div>
-                <div class="gallery-item brutal-card">
-                    <div class="gallery-img-container"><img src="gallery/Yess nit Calicut .jpg"
-                            alt="Yess nit Calicut .jpg" loading="lazy"></div>
-                </div>
-                <div class="gallery-item brutal-card">
-                    <div class="gallery-img-container"><img src="gallery/signal.heic" alt="signal.heic" loading="lazy">
-                    </div>
-                </div>
+            <div class="masonry-grid" id="galleryGrid">
+                <!-- Gallery images loaded dynamically from JavaScript -->
             </div>
         </div>
     </main>
@@ -211,6 +137,9 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="supabase-config.js"></script>
+    <script src="gallery-script.js"></script>
 </body>
 
 </html>

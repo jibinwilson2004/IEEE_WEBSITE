@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | IEEE MBITS</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-dashboard {
+            min-height: 100vh;
+            background: #fff;
+            padding: 2rem;
+        }
+
+        .admin-header {
+            background: #ffde59;
+            border: 4px solid #000;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        .admin-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .admin-header .logout-btn {
+            background: #ff6b35;
+            color: #fff;
+            border: 2px solid #000;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .admin-header .logout-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        .dashboard-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            border-bottom: 4px solid #000;
+            padding-bottom: 1rem;
+        }
+
+        .tab-btn {
+            background: #fff;
+            border: 3px solid #000;
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: #000;
+            color: #fff;
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        .tab-btn:hover {
+            transform: translate(-1px, -1px);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .section-card {
+            background: #fff;
+            border: 4px solid #000;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        .section-card h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 3px solid #000;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            background: #fff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            background: #ffde59;
+            transform: scale(1.02);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: 3px solid #000;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-right: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary {
+            background: #000;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        .btn-danger {
+            background: #ff6b35;
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px #ff6b35;
+        }
+
+        .btn-success {
+            background: #00d084;
+            color: #000;
+        }
+
+        .btn-success:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px #00d084;
+        }
+
+        .events-list {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .event-item {
+            background: #f5f5f5;
+            border: 3px solid #000;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .event-item h3 {
+            margin: 0 0 0.5rem 0;
+            font-weight: 700;
+        }
+
+        .event-item p {
+            margin: 0.25rem 0;
+            font-size: 0.9rem;
+        }
+
+        .event-item .delete-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #ff6b35;
+            color: #fff;
+            border: 2px solid #000;
+            padding: 0.5rem 0.75rem;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item-preview {
+            position: relative;
+            border: 3px solid #000;
+            overflow: hidden;
+            background: #f5f5f5;
+            aspect-ratio: 1;
+        }
+
+        .gallery-item-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-item-preview .delete-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #ff6b35;
+            color: #fff;
+            border: none;
+            padding: 0.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .message {
+            padding: 1rem;
+            border: 2px solid #000;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            display: none;
+        }
+
+        .success {
+            background: #00d084;
+            color: #000;
+        }
+
+        .error {
+            background: #ff6b35;
+            color: #fff;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            display: none;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 0.75rem;
+            background: #ffde59;
+            border: 3px solid #000;
+            cursor: pointer;
+            font-weight: 600;
+            text-align: center;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .file-input-label:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        .password-section {
+            background: #e0f7ff;
+            padding: 1.5rem;
+            border: 3px solid #000;
+        }
+
+        .password-section h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            .admin-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .dashboard-tabs {
+                flex-direction: column;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-dashboard">
+        <div class="admin-header">
+            <h1>Admin Dashboard</h1>
+            <button class="logout-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i> LOGOUT
+            </button>
+        </div>
+
+        <div class="dashboard-tabs">
+            <button class="tab-btn active" data-tab="events">
+                <i class="fas fa-calendar-alt"></i> Manage Events
+            </button>
+            <button class="tab-btn" data-tab="gallery">
+                <i class="fas fa-images"></i> Manage Gallery
+            </button>
+            <button class="tab-btn" data-tab="settings">
+                <i class="fas fa-cog"></i> Settings
+            </button>
+        </div>
+
+        <!-- Events Tab -->
+        <div id="events" class="tab-content active">
+            <div class="section-card">
+                <h2>Add New Event</h2>
+                <div class="success-message" id="eventSuccessMsg"></div>
+                <div class="error-message" id="eventErrorMsg"></div>
+
+                <form id="eventForm">
+                    <div class="form-group">
+                        <label for="eventDate">Event Date (e.g., Jan 2025)</label>
+                        <input type="text" id="eventDate" placeholder="e.g., Jan 2025" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eventTitle">Event Title</label>
+                        <input type="text" id="eventTitle" placeholder="e.g., Workshop on AI" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eventDescription">Event Description</label>
+                        <textarea id="eventDescription" placeholder="Describe the event..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eventImage">Event Image URL</label>
+                        <input type="text" id="eventImage"
+                            placeholder="e.g., events/myevent.jpg, https://example.com/image.jpg, or Drive share link" required>
+                        <small style="display:block; margin-top:0.5rem; color:#333;">Use a public direct image URL. For Google Drive, set link sharing to "Anyone with link".</small>
+                    </div>
+
+                    <button type="submit" id="eventSubmitBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Event
+                    </button>
+                </form>
+            </div>
+
+            <div class="section-card">
+                <h2>Current Events</h2>
+                <div class="events-list" id="eventsList"></div>
+            </div>
+        </div>
+
+        <!-- Gallery Tab -->
+        <div id="gallery" class="tab-content">
+            <div class="section-card">
+                <h2>Add Image to Gallery</h2>
+                <div class="success-message" id="gallerySuccessMsg"></div>
+                <div class="error-message" id="galleryErrorMsg"></div>
+
+                <form id="galleryForm">
+                    <div class="form-group">
+                        <label for="galleryImage">Image URL</label>
+                        <input type="text" id="galleryImage"
+                            placeholder="e.g., gallery/myimage.jpg, https://example.com/image.jpg, or Drive share link">
+                        <small style="display:block; margin-top:0.5rem; color:#333;">Use a public direct image URL. For Google Drive, set link sharing to "Anyone with link".</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="galleryFile">Or select local image file</label>
+                        <input type="file" id="galleryFile" accept="image/*">
+                        <small style="display:block; margin-top:0.5rem; color:#333;">⚠️ <strong>Important:</strong> Local file uploads are saved only in <em>this browser</em> on <em>this device</em>. Other visitors will NOT see them. Use an image URL above for images visible to everyone.</small>
+                    </div>
+
+                    <div id="galleryLocalWarning" style="display:none; background:#fff3cd; border:3px solid #f0a500; padding:1rem; margin-bottom:1rem; font-weight:600; color:#5c3d00;">
+                        ⚠️ <strong>Local file uploaded — only visible in this browser!</strong><br>
+                        This image is stored in your browser's local storage. It will <strong>NOT appear</strong> for other visitors or on other devices.<br>
+                        To show images to everyone: upload to <a href="https://drive.google.com" target="_blank">Google Drive</a> or <a href="https://imgur.com" target="_blank">Imgur</a>, get a share link, and paste it in the Image URL field above.
+                    </div>
+
+                    <div class="form-group">
+                        <label for="galleryAlt">Image Description (Alt Text)</label>
+                        <input type="text" id="galleryAlt" placeholder="e.g., Workshop event photo" required>
+                    </div>
+
+                    <button type="submit" id="gallerySubmitBtn" class="btn btn-primary">
+                        <i class="fas fa-image"></i> Add Image
+                    </button>
+                </form>
+            </div>
+
+            <div class="section-card">
+                <h2>Gallery Images</h2>
+                <div class="gallery-grid" id="galleryGrid"></div>
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div id="settings" class="tab-content">
+            <div class="section-card password-section">
+                <h3>Change Admin Password</h3>
+                <div class="success-message" id="passwordSuccessMsg"></div>
+                <div class="error-message" id="passwordErrorMsg"></div>
+
+                <form id="passwordForm">
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password</label>
+                        <input type="password" id="currentPassword" placeholder="Enter current password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" placeholder="Enter new password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm New Password</label>
+                        <input type="password" id="confirmPassword" placeholder="Confirm new password" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-key"></i> Update Password
+                    </button>
+                </form>
+            </div>
+
+            <div class="section-card">
+                <h3>Data Management</h3>
+                <p style="margin-bottom: 1rem; font-weight: 600;">Export or reset your data:</p>
+                <button class="btn btn-primary" id="exportDataBtn">
+                    <i class="fas fa-download"></i> Export Data
+                </button>
+                <button class="btn btn-danger" id="resetDataBtn">
+                    <i class="fas fa-sync-alt"></i> Reset to Default
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="supabase-config.js"></script>
+    <script src="admin-script.js"></script>
+</body>
+
+</html>

@@ -319,7 +319,7 @@ const benefitsData = [
 const activitiesData = [
     {
         date: 'Nov 2023',
-        image: 'events/Signal/sps1.heic',
+        image: 'events/Signal/sps1.jpg',
         title: 'Signal 2.0',
         description: 'Flagship programme of IEEE SPS Kerala Chapter hosted by MBITS.'
     },
@@ -477,13 +477,14 @@ function createInfiniteBenefitsLoop() {
     }
 }
 
-// Function to render normal distribution of activities
-function renderActivitiesGrid() {
+// Function to render activities grid from a data array
+function renderActivitiesGrid(activities) {
     const eventsGrid = document.getElementById('eventsGrid');
     if (!eventsGrid) return;
     const colors = ['bg-yellow', 'bg-lime', 'bg-pink', 'bg-lavender', 'bg-blue'];
 
-    activitiesData.forEach((activity, index) => {
+    eventsGrid.innerHTML = '';
+    activities.forEach((activity, index) => {
         const activityCard = document.createElement('div');
         const colorClass = colors[index % colors.length];
         activityCard.className = `activity-card brutal-card ${colorClass}`;
@@ -502,9 +503,40 @@ function renderActivitiesGrid() {
     });
 }
 
+// Load activities from Supabase (fallback to hardcoded if empty/error)
+async function loadActivitiesFromSupabase() {
+    // Only run if eventsGrid exists on this page
+    if (!document.getElementById('eventsGrid')) return;
+
+    // Show loading state
+    const eventsGrid = document.getElementById('eventsGrid');
+    eventsGrid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:3rem;"><p style="font-weight:600;">Loading events...</p></div>`;
+
+    try {
+        if (typeof supabaseClient === 'undefined') throw new Error('Supabase not loaded');
+
+        const { data, error } = await supabaseClient
+            .from('events')
+            .select('id, date, title, description, image')
+            .order('created_at', { ascending: false });
+
+        if (error) throw error;
+
+        if (data && data.length > 0) {
+            renderActivitiesGrid(data);
+        } else {
+            // Supabase table empty — show hardcoded defaults
+            renderActivitiesGrid(activitiesData);
+        }
+    } catch (err) {
+        console.warn('Supabase events fetch failed, using defaults:', err.message);
+        renderActivitiesGrid(activitiesData);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     createInfiniteBenefitsLoop();
-    renderActivitiesGrid();
+    loadActivitiesFromSupabase();
     initGeminiChatbot();
 });
 

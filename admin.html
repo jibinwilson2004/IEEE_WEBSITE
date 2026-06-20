@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | IEEE MBITS</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #ffde59 0%, #ff6b35 100%);
+            padding: 2rem;
+        }
+
+        .login-card {
+            background: #fff;
+            border: 4px solid #000;
+            padding: 3rem;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 8px 8px 0px #000;
+            transform: rotate(-1deg);
+        }
+
+        .login-card h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .login-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 3px solid #000;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            background: #fff;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            background: #ffde59;
+            transform: scale(1.02);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #000;
+            color: #fff;
+            border: 3px solid #000;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .login-btn:hover {
+            background: #ffde59;
+            color: #000;
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        .login-btn:active {
+            transform: translate(0, 0);
+            box-shadow: 0px 0px 0px #000;
+        }
+
+        .error-message {
+            background: #ff6b35;
+            color: #fff;
+            padding: 0.75rem;
+            border: 2px solid #000;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            display: none;
+        }
+
+        .success-message {
+            background: #00d084;
+            color: #fff;
+            padding: 0.75rem;
+            border: 2px solid #000;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            display: none;
+        }
+
+        .setup-hint {
+            background: #e0f7ff;
+            padding: 1rem;
+            border: 2px dashed #000;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .setup-hint p {
+            margin: 0.5rem 0;
+        }
+
+        .setup-hint code {
+            background: #fff;
+            padding: 0.2rem 0.4rem;
+            border: 1px solid #000;
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-login-container">
+        <div class="login-card">
+            <h1>Admin</h1>
+            <p>IEEE MBITS Management Portal</p>
+
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="adminPassword">Admin Password</label>
+                    <input type="password" id="adminPassword" placeholder="Enter admin password" required>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> LOGIN
+                </button>
+            </form>
+
+            <div class="setup-hint">
+                <p><strong>First Time Setup:</strong></p>
+                <p>Default password: <code>admin123</code></p>
+                <p>Change it in the admin dashboard after login.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize default admin credentials if not already set
+        function initializeAdmin() {
+            if (!localStorage.getItem('adminPassword')) {
+                localStorage.setItem('adminPassword', 'admin123');
+                localStorage.setItem('adminSetup', 'true');
+            }
+        }
+
+        // Check if admin is already logged in
+        function checkAdminSession() {
+            if (localStorage.getItem('adminLoggedIn') === 'true') {
+                window.location.href = './admin-dashboard.html';
+            }
+        }
+
+        // Handle login
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const password = document.getElementById('adminPassword').value;
+            const storedPassword = localStorage.getItem('adminPassword') || 'admin123';
+            const errorMsg = document.getElementById('errorMessage');
+            const successMsg = document.getElementById('successMessage');
+
+            if (password === storedPassword) {
+                localStorage.setItem('adminLoggedIn', 'true');
+                localStorage.setItem('adminLoginTime', new Date().getTime());
+                successMsg.textContent = 'Login successful! Redirecting to dashboard...';
+                successMsg.style.display = 'block';
+                setTimeout(() => {
+                    window.location.href = './admin-dashboard.html';
+                }, 1500);
+            } else {
+                errorMsg.textContent = 'Invalid password. Please try again.';
+                errorMsg.style.display = 'block';
+                document.getElementById('adminPassword').value = '';
+                setTimeout(() => {
+                    errorMsg.style.display = 'none';
+                }, 3000);
+            }
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            initializeAdmin();
+            checkAdminSession();
+        });
+    </script>
+</body>
+
+</html>
