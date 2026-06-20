@@ -3,7 +3,15 @@
 // ============================================================
 
 const defaultGalleryImages = [
+    { src: 'gallery/_Z3A5935.JPG', alt: '_Z3A5935.JPG' },
     { src: 'gallery/1.jpg', alt: '1.jpg' },
+    { src: 'gallery/139009.jpg', alt: '139009.jpg' },
+    { src: 'gallery/139010.jpg', alt: '139010.jpg' },
+    { src: 'gallery/139011.jpg', alt: '139011.jpg' },
+    { src: 'gallery/139012.jpg', alt: '139012.jpg' },
+    { src: 'gallery/139013.jpg', alt: '139013.jpg' },
+    { src: 'gallery/139014.jpg', alt: '139014.jpg' },
+    { src: 'gallery/139015.jpg', alt: '139015.jpg' },
     { src: 'gallery/1D8A3893.jpg', alt: '1D8A3893.jpg' },
     { src: 'gallery/2.jpg', alt: '2.jpg' },
     { src: 'gallery/3.jpg', alt: '3.jpg' },
@@ -21,8 +29,8 @@ const defaultGalleryImages = [
     { src: 'gallery/IMG-20260126-WA0360.jpg', alt: 'IMG-20260126-WA0360.jpg' },
     { src: 'gallery/IMG-20260126-WA0362.jpg', alt: 'IMG-20260126-WA0362.jpg' },
     { src: 'gallery/Khm .jpg', alt: 'Khm .jpg' },
-    { src: 'gallery/Yess nit Calicut .jpg', alt: 'Yess nit Calicut .jpg' },
-    { src: 'gallery/signal.jpg', alt: 'signal.jpg' }
+    { src: 'gallery/signal.jpg', alt: 'signal.jpg' },
+    { src: 'gallery/Yess nit Calicut .jpg', alt: 'Yess nit Calicut .jpg' }
 ];
 
 // Show loading state

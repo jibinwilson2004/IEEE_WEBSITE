@@ -427,7 +427,7 @@ const activitiesData = [
     },
     {
         date: 'Feb 2026',
-        image: 'events/exec.jpg',
+        image: 'events/VIBE.jpg',
         title: 'Vibe.exe',
         description: 'A hands-on workshop on modern web development practices, emerging technologies, and IT industry trends.'
     },
