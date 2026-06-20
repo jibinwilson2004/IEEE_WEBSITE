@@ -457,7 +457,7 @@ const activitiesData = [
     },
     {
         date: 'Jun 2025',
-        image: 'events/informatyka.jpg',
+        image: 'events/innformatyka.jpg',
         title: 'Quantum Computing Webinar',
         description: 'A webinar exploring the fundamentals of quantum computing and its potential applications in various fields.'
     },
@@ -475,7 +475,7 @@ const activitiesData = [
     },
     {
         date: 'Jul 2025',
-        image: 'events/mech.jpg',
+        image: 'events/Mech.jpg',
         title: 'Mechmania',
         description: 'Training session for women in handling vehicle breakdown'
     },
@@ -496,12 +496,6 @@ const activitiesData = [
         image: 'events/Spsday.webp',
         title: 'Poster Design Competition',
         description: 'A poster design competition in collabration with IEEE Signal Processing Society Kerala Chapter '
-    },
-    {
-        date: 'Apr 2026',
-        image: 'events/Spsday.webp',
-        title: 'Poster Design Competition',
-        description: 'A poster design competition as part of IEEE SPS Day '
     }
 
 ];
