@@ -477,6 +477,26 @@ function createInfiniteBenefitsLoop() {
     }
 }
 
+// Parse event date strings like "Apr 2026", "Nov 2023" into real Date objects
+function parseEventDate(dateStr) {
+    const months = {
+        'jan': 0, 'feb': 1, 'mar': 2, 'apr': 3, 'may': 4, 'jun': 5,
+        'jul': 6, 'aug': 7, 'sep': 8, 'oct': 9, 'nov': 10, 'dec': 11
+    };
+    if (!dateStr) return new Date(0);
+    const parts = dateStr.trim().split(' ');
+    if (parts.length < 2) return new Date(0);
+    const month = months[parts[0].toLowerCase().slice(0, 3)];
+    const year = parseInt(parts[1]);
+    if (month === undefined || isNaN(year)) return new Date(0);
+    return new Date(year, month, 1);
+}
+
+// Sort events array newest first by their date field
+function sortByDateDesc(events) {
+    return [...events].sort((a, b) => parseEventDate(b.date) - parseEventDate(a.date));
+}
+
 // Function to render activities grid from a data array
 function renderActivitiesGrid(activities) {
     const eventsGrid = document.getElementById('eventsGrid');
@@ -523,14 +543,15 @@ async function loadActivitiesFromSupabase() {
         if (error) throw error;
 
         if (data && data.length > 0) {
-            renderActivitiesGrid(data);
+            // Sort by the actual event date field (newest first)
+            renderActivitiesGrid(sortByDateDesc(data));
         } else {
-            // Supabase table empty — show hardcoded defaults (newest first)
-            renderActivitiesGrid([...activitiesData].reverse());
+            // Supabase table empty — show hardcoded defaults sorted by date
+            renderActivitiesGrid(sortByDateDesc(activitiesData));
         }
     } catch (err) {
         console.warn('Supabase events fetch failed, using defaults:', err.message);
-        renderActivitiesGrid([...activitiesData].reverse());
+        renderActivitiesGrid(sortByDateDesc(activitiesData));
     }
 }
 
