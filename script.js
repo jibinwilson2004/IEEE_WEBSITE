@@ -448,6 +448,12 @@ const activitiesData = [
         image: 'events/wiring wizard/poster.png',
         title: 'wiring wizard',
         description: 'A technical wiring competition testing students\' circuit design, speed, accuracy, and safety adherence.'
+    },
+    {
+        date: 'Mar 2026',
+        image: 'events/EAS-CASS/Poster.jpg',
+        title: 'EAS-CASS',
+        description: 'A technical wiring competition testing students\' circuit design, speed, accuracy, and safety adherence.'
     }
 ];
 
