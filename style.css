@@ -1245,8 +1245,8 @@ h1, h2, h3, h4, h5 { font-family: 'Orbitron', 'Space Grotesk', sans-serif; font-
     50% { transform: rotate(-8deg) translateY(-15px); }
 }
 
-/* Gemini Chatbot */
-.gemini-chatbot {
+/* AI Chatbot */
+.ai-chatbot {
     position: fixed;
     right: 24px;
     bottom: 24px;
@@ -1254,7 +1254,7 @@ h1, h2, h3, h4, h5 { font-family: 'Orbitron', 'Space Grotesk', sans-serif; font-
     font-family: 'Space Grotesk', Arial, sans-serif;
 }
 
-.gemini-chatbot-panel {
+.ai-chatbot-panel {
     width: min(380px, calc(100vw - 32px));
     height: min(560px, calc(100vh - 110px));
     display: none;
@@ -1265,11 +1265,11 @@ h1, h2, h3, h4, h5 { font-family: 'Orbitron', 'Space Grotesk', sans-serif; font-
     overflow: hidden;
 }
 
-.gemini-chatbot.open .gemini-chatbot-panel {
+.ai-chatbot.open .ai-chatbot-panel {
     display: flex;
 }
 
-.gemini-chatbot-header {
+.ai-chatbot-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1280,7 +1280,7 @@ h1, h2, h3, h4, h5 { font-family: 'Orbitron', 'Space Grotesk', sans-serif; font-
     color: #000;
 }
 
-.gemini-chatbot-title {
+.ai-chatbot-title {
     display: flex;
     align-items: center;
     gap: 0.7rem;
@@ -1288,13 +1288,13 @@ h1, h2, h3, h4, h5 { font-family: 'Orbitron', 'Space Grotesk', sans-serif; font-
     line-height: 1.1;
 }
 
-.gemini-chatbot-title i {
+.ai-chatbot-title i {
     font-size: 1.3rem;
 }
 
-.gemini-chatbot-close,
-.gemini-chatbot-toggle,
-.gemini-chatbot-send {
+.ai-chatbot-close,
+.ai-chatbot-toggle,
+.ai-chatbot-send {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1306,20 +1306,20 @@ h1, h2, h3, h4, h5 { font-family: 'Orbitron', 'Space Grotesk', sans-serif; font-
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.gemini-chatbot-close:hover,
-.gemini-chatbot-toggle:hover,
-.gemini-chatbot-send:hover {
+.ai-chatbot-close:hover,
+.ai-chatbot-toggle:hover,
+.ai-chatbot-send:hover {
     transform: translate(2px, 2px);
     box-shadow: 2px 2px 0 #000;
 }
 
-.gemini-chatbot-close {
+.ai-chatbot-close {
     width: 36px;
     height: 36px;
     font-size: 1rem;
 }
 
-.gemini-chatbot-messages {
+.ai-chatbot-messages {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -1329,7 +1329,7 @@ h1, h2, h3, h4, h5 { font-family: 'Orbitron', 'Space Grotesk', sans-serif; font-
     overflow-y: auto;
 }
 
-.gemini-message {
+.ai-message {
     max-width: 88%;
     padding: 0.75rem 0.9rem;
     border: 3px solid #000;
@@ -1340,17 +1340,17 @@ h1, h2, h3, h4, h5 { font-family: 'Orbitron', 'Space Grotesk', sans-serif; font-
     overflow-wrap: anywhere;
 }
 
-.gemini-message.bot {
+.ai-message.bot {
     align-self: flex-start;
     background: #a7f3d0;
 }
 
-.gemini-message.user {
+.ai-message.user {
     align-self: flex-end;
     background: #c7d2fe;
 }
 
-.gemini-chatbot-form {
+.ai-chatbot-form {
     display: flex;
     gap: 0.6rem;
     padding: 1rem;
@@ -1358,7 +1358,7 @@ h1, h2, h3, h4, h5 { font-family: 'Orbitron', 'Space Grotesk', sans-serif; font-
     border-top: 4px solid #000;
 }
 
-.gemini-chatbot-input {
+.ai-chatbot-input {
     flex: 1;
     min-width: 0;
     border: 3px solid #000;
@@ -1370,18 +1370,18 @@ h1, h2, h3, h4, h5 { font-family: 'Orbitron', 'Space Grotesk', sans-serif; font-
     outline: none;
 }
 
-.gemini-chatbot-input:focus {
+.ai-chatbot-input:focus {
     box-shadow: inset 0 0 0 2px #ffde59;
 }
 
-.gemini-chatbot-send {
+.ai-chatbot-send {
     width: 48px;
     min-width: 48px;
     height: 48px;
     background: #ff6b35;
 }
 
-.gemini-chatbot-toggle {
+.ai-chatbot-toggle {
     position: relative;
     width: 68px;
     height: 68px;
@@ -1391,7 +1391,7 @@ h1, h2, h3, h4, h5 { font-family: 'Orbitron', 'Space Grotesk', sans-serif; font-
     font-size: 1.65rem;
 }
 
-.gemini-chatbot-prompt {
+.ai-chatbot-prompt {
     position: absolute;
     right: 82px;
     bottom: 12px;
@@ -1410,10 +1410,10 @@ h1, h2, h3, h4, h5 { font-family: 'Orbitron', 'Space Grotesk', sans-serif; font-
     transform-origin: right bottom;
     transform: translateY(8px) scale(0.98);
     opacity: 0;
-    animation: geminiPromptPop 420ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+    animation: aiPromptPop 420ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
 }
 
-.gemini-chatbot-prompt::after {
+.ai-chatbot-prompt::after {
     content: '';
     position: absolute;
     right: -11px;
@@ -1426,7 +1426,7 @@ h1, h2, h3, h4, h5 { font-family: 'Orbitron', 'Space Grotesk', sans-serif; font-
     transform: rotate(45deg);
 }
 
-@keyframes geminiPromptPop {
+@keyframes aiPromptPop {
     0% {
         opacity: 0;
         transform: translateY(12px) scale(0.96);
@@ -1442,28 +1442,28 @@ h1, h2, h3, h4, h5 { font-family: 'Orbitron', 'Space Grotesk', sans-serif; font-
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .gemini-chatbot-prompt {
+    .ai-chatbot-prompt {
         animation: none !important;
         transform: none !important;
         opacity: 1 !important;
     }
 }
 
-.gemini-chatbot.open .gemini-chatbot-toggle {
+.ai-chatbot.open .ai-chatbot-toggle {
     display: none;
 }
 
 @media (max-width: 520px) {
-    .gemini-chatbot {
+    .ai-chatbot {
         right: 16px;
         bottom: 16px;
     }
 
-    .gemini-chatbot-panel {
+    .ai-chatbot-panel {
         height: min(520px, calc(100vh - 88px));
     }
 
-    .gemini-chatbot-prompt {
+    .ai-chatbot-prompt {
         right: 76px;
         max-width: calc(100vw - 124px);
         font-size: 0.82rem;

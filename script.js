@@ -607,60 +607,85 @@ async function loadActivitiesFromSupabase() {
 document.addEventListener('DOMContentLoaded', function () {
     createInfiniteBenefitsLoop();
     loadActivitiesFromSupabase();
-    initGeminiChatbot();
+    initAIChatbot();
 });
 
-const GEMINI_API_KEY = 'AIzaSyBSKg6faIvTSXGDuTas4fNfyKTdP38Pqjk';
-const GEMINI_MODEL = 'gemini-2.5-flash';
+const GEMINI_API_KEY = 'PASTE_YOUR_GEMINI_API_KEY_HERE';
+const GEMINI_MODEL = 'gemini-2.0-flash';
 
 const ieeeMbitsContext = `
 You are the IEEE MBITS website assistant.
-Answer briefly and helpfully for visitors of IEEE Student Branch at Mar Baselios Institute of Technology and Science, Kothamangalam, Kerala.
-Known facts:
+Answer briefly, politely, and helpfully for visitors of IEEE Student Branch at Mar Baselios Institute of Technology and Science, Kothamangalam, Kerala.
+
+For questions specifically about IEEE MBITS (such as local executives, local events, or operations), rely on these known facts:
 - IEEE MBITS Student Branch was established on 3 July 2022.
 - Contact email: ieeesbmbits@gmail.com.
 - Phone: +91 7907863486.
-- Active groups include SPS, CASS, WIE, Computer Society, and Sensor Council.
+- Active groups include SPS, CASS, WIE, Computer Society, and Sensors Council.
 - The branch organizes workshops, guest lectures, hackathons, research activities, networking events, and innovation programs.
 - For joining, direct users to the Join Now page.
-If you are unsure, ask the visitor to contact the branch directly.
+
+You must recognize, explain, and answer questions about specific terms:
+- MYOSA: Stands for "Make Your Own Sensors Applications". It is a modular, plug-and-play, open-source multi-sensor hardware/software system designed by the IEEE Sensors Council for learning sensor technology and building smart IoT applications. Since IEEE MBITS SB has an active Sensors Council Student Branch Chapter, visitors can build projects using the MYOSA ecosystem.
+- IEEEXtreme: A global virtual 24-hour programming hackathon/competition for IEEE student members.
+- LINK: Local Integrated Network of Kerala IEEE Students.
+- Kochi Subsection: The local subsection under the IEEE Kerala Section which guides the MBITS Student Branch.
+
+For general IEEE questions (such as other societies, general benefits, or general technology/engineering topics), use your general knowledge to answer them fully and accurately.
+
+Only if a question is completely unrelated to IEEE, engineering, or technology, should you politely ask the visitor to contact the branch directly at ieeesbmbits@gmail.com or +91 7907863486.
 `;
 
-function initGeminiChatbot() {
-    const geminiChatbot = document.getElementById('geminiChatbot');
-    const geminiChatbotToggle = document.getElementById('geminiChatbotToggle');
-    const geminiChatbotClose = document.getElementById('geminiChatbotClose');
-    const geminiChatbotForm = document.getElementById('geminiChatbotForm');
-    const geminiChatbotInput = document.getElementById('geminiChatbotInput');
-    const geminiChatbotMessages = document.getElementById('geminiChatbotMessages');
+function initAIChatbot() {
+    const aiChatbot = document.getElementById('aiChatbot');
+    const aiChatbotToggle = document.getElementById('aiChatbotToggle');
+    const aiChatbotClose = document.getElementById('aiChatbotClose');
+    const aiChatbotForm = document.getElementById('aiChatbotForm');
+    const aiChatbotInput = document.getElementById('aiChatbotInput');
+    const aiChatbotMessages = document.getElementById('aiChatbotMessages');
 
-    if (!geminiChatbot || !geminiChatbotToggle || !geminiChatbotClose || !geminiChatbotForm || !geminiChatbotInput || !geminiChatbotMessages) {
+    if (!aiChatbot || !aiChatbotToggle || !aiChatbotClose || !aiChatbotForm || !aiChatbotInput || !aiChatbotMessages) {
         return;
     }
 
-    function addGeminiMessage(text, sender) {
+    function addAIMessage(text, sender) {
         const message = document.createElement('div');
-        message.className = `gemini-message ${sender}`;
+        message.className = `ai-message ${sender}`;
         message.textContent = text;
-        geminiChatbotMessages.appendChild(message);
-        geminiChatbotMessages.scrollTop = geminiChatbotMessages.scrollHeight;
+        aiChatbotMessages.appendChild(message);
+        aiChatbotMessages.scrollTop = aiChatbotMessages.scrollHeight;
         return message;
     }
 
     async function askGemini(userMessage) {
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`, {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'x-goog-api-key': GEMINI_API_KEY
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                contents: [{
-                    role: 'user',
-                    parts: [{
-                        text: `${ieeeMbitsContext}\nVisitor question: ${userMessage}`
-                    }]
-                }]
+                contents: [
+                    {
+                        role: 'user',
+                        parts: [
+                            {
+                                text: `Visitor question: ${userMessage}`
+                            }
+                        ]
+                    }
+                ],
+                system_instruction: {
+                    parts: [
+                        {
+                            text: ieeeMbitsContext
+                        }
+                    ]
+                },
+                tools: [
+                    {
+                        google_search: {}
+                    }
+                ]
             })
         });
 
@@ -671,30 +696,30 @@ function initGeminiChatbot() {
             throw new Error(errorMessage);
         }
 
-        return data.candidates?.[0]?.content?.parts?.map(part => part.text || '').join('').trim()
+        return data.candidates?.[0]?.content?.parts?.[0]?.text?.trim()
             || 'I could not generate a response. Please try again.';
     }
 
-    geminiChatbotToggle.addEventListener('click', () => {
-        geminiChatbot.classList.add('open');
-        geminiChatbotInput.focus();
+    aiChatbotToggle.addEventListener('click', () => {
+        aiChatbot.classList.add('open');
+        aiChatbotInput.focus();
     });
 
-    geminiChatbotClose.addEventListener('click', () => {
-        geminiChatbot.classList.remove('open');
+    aiChatbotClose.addEventListener('click', () => {
+        aiChatbot.classList.remove('open');
     });
 
-    geminiChatbotForm.addEventListener('submit', async (event) => {
+    aiChatbotForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        const userMessage = geminiChatbotInput.value.trim();
+        const userMessage = aiChatbotInput.value.trim();
         if (!userMessage) return;
 
-        addGeminiMessage(userMessage, 'user');
-        geminiChatbotInput.value = '';
-        geminiChatbotInput.disabled = true;
+        addAIMessage(userMessage, 'user');
+        aiChatbotInput.value = '';
+        aiChatbotInput.disabled = true;
 
-        const loadingMessage = addGeminiMessage('Thinking...', 'bot');
+        const loadingMessage = addAIMessage('Thinking...', 'bot');
 
         try {
             if (!GEMINI_API_KEY || GEMINI_API_KEY === 'PASTE_YOUR_GEMINI_API_KEY_HERE') {
@@ -705,8 +730,8 @@ function initGeminiChatbot() {
         } catch (error) {
             loadingMessage.textContent = `Sorry, ${error.message}`;
         } finally {
-            geminiChatbotInput.disabled = false;
-            geminiChatbotInput.focus();
+            aiChatbotInput.disabled = false;
+            aiChatbotInput.focus();
         }
     });
 }
