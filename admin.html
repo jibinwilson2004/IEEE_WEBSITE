@@ -182,7 +182,7 @@
         // Check if admin is already logged in
         function checkAdminSession() {
             if (localStorage.getItem('adminLoggedIn') === 'true') {
-                window.location.href = './admin-dashboard.html';
+                window.location.href = './admin-dashboard';
             }
         }
 
@@ -201,7 +201,7 @@
                 successMsg.textContent = 'Login successful! Redirecting to dashboard...';
                 successMsg.style.display = 'block';
                 setTimeout(() => {
-                    window.location.href = './admin-dashboard.html';
+                    window.location.href = './admin-dashboard';
                 }, 1500);
             } else {
                 errorMsg.textContent = 'Invalid password. Please try again.';

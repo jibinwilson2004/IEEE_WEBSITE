@@ -5,14 +5,14 @@
 // ── Auth ────────────────────────────────────────────────────
 function checkAdminAuth() {
     if (localStorage.getItem('adminLoggedIn') !== 'true') {
-        window.location.href = './admin.html';
+        window.location.href = './admin';
     }
 }
 
 function logout() {
     localStorage.removeItem('adminLoggedIn');
     localStorage.removeItem('adminLoginTime');
-    window.location.href = './admin.html';
+    window.location.href = './admin';
 }
 
 // ── UI Helpers ──────────────────────────────────────────────
