@@ -449,12 +449,12 @@ const activitiesData = [
         title: 'wiring wizard',
         description: 'A technical wiring competition testing students\' circuit design, speed, accuracy, and safety adherence.'
     },
-    {
+/*    {
         date: 'Jun 2026',
         image: 'events/GIT.webp',
         title: 'Introduction to Git and Github',
         description: 'A hands-on workshop covering the fundamentals of version control, branching, merging, and collaborative workflows.'
-    },
+    },*/
     {
         date: 'Jun 2025',
         image: 'events/innformatyka.jpg',
